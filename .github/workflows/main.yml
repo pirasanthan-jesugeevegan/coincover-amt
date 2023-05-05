@@ -13,9 +13,6 @@ jobs:
       - name: Start Docker Compose
         run: docker-compose up -d influxdb grafana
 
-      - name: Install k6
-        uses: loadimpact/k6-action@v1.3.0
-
       - name: Run k6
         run: |
           docker-compose run --rm k6 run /scripts/ewoks.js
