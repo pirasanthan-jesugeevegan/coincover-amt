@@ -1,6 +1,9 @@
 name: Load Testing with k6
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   test:
