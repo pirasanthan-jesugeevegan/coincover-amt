@@ -33,3 +33,5 @@ jobs:
           SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${ { secrets.HOST_DNS }}
           REMOTE_USER: ${ { secrets.USERNAME }}
+        run: |
+          docker pull ${{ steps.login-ecr.outputs.registry }}/my-ecr-repo:my-tag
