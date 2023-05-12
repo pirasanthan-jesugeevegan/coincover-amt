@@ -27,23 +27,12 @@ jobs:
       #   run: |
       #     docker pull ${{ steps.login-ecr.outputs.registry }}/my-ecr-repo:my-tag
 
-      # - name: Run container on EC2
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: '52.91.88.198'
-      #     username: 'ubuntu'
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     script: |
-      #       chmod +x ./build-push.sh
-      #       ./run-load-test.sh
-
-
-   - name: Run container on EC2
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${ { secrets.HOST_DNS }}
-          REMOTE_USER: ${ { secrets.USERNAME }}
-        script: |
+      - name: Run container on EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${ { secrets.HOST_DNS }}
+          username: ${ { secrets.USERNAME }}
+          key: ${ { secrets.EC2_SSH_KEY }}
+          script: |
             chmod +x ./build-push.sh
             ./run-load-test.sh
