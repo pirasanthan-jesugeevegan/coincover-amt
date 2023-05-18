@@ -1,9 +1,9 @@
 {
-  "name": "typescript",
+  "name": "coincover-amt",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "ssh://git@github.com/k6io/example-typescript.git",
-  "author": "Tim Coppieters",
+  "repository": "git@github.com:pirasanthan-jesugeevegan/coincover-amt.git",
+  "author": "Pirasanthan Jesugeevegan",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.20.7",
@@ -23,8 +23,9 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "scripts": {
-    "playwright": "npx playwright test",
-    "k6": "npm run build && docker-compose run -T xk6-browser run dist/k6/example.pt.js",
+    "test:ui": "npx playwright test ./tests/*.ui.ts",
+    "test:api": "npx playwright test ./tests/*.api.ts",
+    "test:pt": "npm run build && docker-compose run -T xk6-browser run dist/k6/example-test.js",
     "build": "npx webpack"
   }
 }

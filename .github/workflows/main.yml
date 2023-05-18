@@ -10,12 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Start Docker Compose
-        run: docker-compose up -d influxdb grafana
-
       - name: Run k6
         run: |
-          docker-compose run --rm k6 run /scripts/ewoks.js
+          npm run test:pt
 
       - name: Stop Docker Compose
         run: docker-compose down
