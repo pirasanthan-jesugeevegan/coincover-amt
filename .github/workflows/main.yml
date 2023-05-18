@@ -12,6 +12,10 @@ jobs:
 
       - name: Run k6
         run: |
+          npm install
+
+      - name: Run k6
+        run: |
           npm run test:pt
 
       - name: Stop Docker Compose
