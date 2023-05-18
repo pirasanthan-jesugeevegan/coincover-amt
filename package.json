@@ -25,7 +25,7 @@
   "scripts": {
     "test:ui": "npx playwright test ./tests/*.ui.ts",
     "test:api": "npx playwright test ./tests/*.api.ts",
-    "test:pt": "npm run build && docker-compose run -T xk6-browser run dist/k6/example-test.js",
+    "test:pt": "npm run build && docker-compose run -T xk6-browser run dist/k6/example.pt.js",
     "build": "npx webpack"
   }
 }
