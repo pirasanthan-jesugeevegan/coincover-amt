@@ -32,6 +32,7 @@ jobs:
         run: npm run test:${{ github.event.inputs.test_type }}
 
   Deploy_Report:
+    needs: Run_Test
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
