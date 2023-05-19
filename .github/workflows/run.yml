@@ -1,18 +1,21 @@
 name: Playwright Tests
 
 on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
   workflow_dispatch:
     inputs:
-      test:
+      test_type:
         type: choice
         description: 'Trigger option'
         required: true
         options:
           - ui
           - api
+env:
+  TEST_TYPE: ${{ github.event.inputs.test_type }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
