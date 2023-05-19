@@ -25,8 +25,8 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "scripts": {
-    "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=line,allure-playwright",
-    "test:api": "npx playwright test ./tests/*.api.ts --reporter=line,allure-playwright",
+    "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=allure-playwright",
+    "test:api": "npx playwright test ./tests/*.api.ts --reporter=allure-playwright",
     "test:pt": "npm run build && docker-compose run -T xk6-browser run dist/k6/example.pt.js",
     "build": "npx webpack",
     "allure:report": "npx allure generate ./allure-results --clean"
