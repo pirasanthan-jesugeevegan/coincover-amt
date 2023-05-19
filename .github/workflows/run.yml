@@ -14,18 +14,24 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{secrets.AWS_REGION}}
       - name: Install dependencies
         run: npm i
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm run test:ui
-      - uses: actions/upload-artifact@v3
+      - name: reploy report to s3
         if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+        run: |
+          chmod +x ./deploy-report.sh
+          ./deploy-report.sh
+
     # steps:
     #   - uses: actions/checkout@v2
 
