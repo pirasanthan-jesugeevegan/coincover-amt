@@ -24,14 +24,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Install xmllint
+        run: |
+          sudo apt-add-repository ppa:qameta/allure
+          sudo apt-get update 
+          sudo apt-get install allure
       - name: Install dependencies
         run: npm i
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm run test:${{ github.event.inputs.test_type }}
-      # - name: generate report
-      #   run: npx allure generate ./allure-results --clean
+      - name: generate report
+        run: npx allure generate ./allure-results --clean
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
