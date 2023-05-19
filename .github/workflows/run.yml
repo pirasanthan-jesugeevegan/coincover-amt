@@ -30,8 +30,8 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm run test:${{ github.event.inputs.test_type }}
-      - name: generate report
-        run: npx allure generate ./allure-results --clean
+      # - name: generate report
+      #   run: npx allure generate ./allure-results --clean
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
