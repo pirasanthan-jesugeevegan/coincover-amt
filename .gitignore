@@ -6,3 +6,5 @@ dist
 /playwright/.cache/
 .bin/
 .DS_Store
+allure-report
+allure-results
