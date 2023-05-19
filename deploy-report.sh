@@ -7,4 +7,4 @@ set +e
 aws s3 sync \
     --acl public-read \
     ./playwright-report \
-    s3://coincover-pj/
+    s3://coincover-pj/ui/${date=$(date '+%Y-%m-%d')}
