@@ -14,6 +14,7 @@
     "@playwright/test": "^1.33.0",
     "@types/k6": "^0.42.0",
     "@types/webpack": "^5.28.0",
+    "allure-commandline": "^2.22.0",
     "allure-playwright": "^2.3.0",
     "babel-loader": "^9.1.0",
     "clean-webpack-plugin": "^4.0.0",
