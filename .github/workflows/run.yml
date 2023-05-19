@@ -36,7 +36,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:${{ github.event.inputs.message }}
+        run: npm run test:${{ github.event.inputs.test_type }}
       - name: reploy report to s3
         if: always()
         run: |
