@@ -30,11 +30,6 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npm run test:${{ github.event.inputs.test_type }}
-
-  Deploy_Report:
-    needs: Run_Test
-    runs-on: ubuntu-latest
-    steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
