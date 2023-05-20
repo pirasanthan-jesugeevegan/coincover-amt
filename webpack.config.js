@@ -8,7 +8,7 @@ module.exports = {
   mode: 'production',
   entry: GlobEntries('./tests/**/*pt.ts'), // Generates multiple entry for each test
   output: {
-    path: path.join(__dirname, 'dist', 'k6'),
+    path: path.join(__dirname, 'dist'),
     libraryTarget: 'commonjs',
     filename: '[name].js',
   },

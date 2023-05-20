@@ -15,6 +15,8 @@ on:
           - api
 env:
   TEST_TYPE: ${{ github.event.inputs.test_type }}
+  USER_NAME: ${{ github.actor }}
+  PLAYWRIGHT_JSON_OUTPUT_NAME: 'results.json'
 
 jobs:
   Run_Test:
