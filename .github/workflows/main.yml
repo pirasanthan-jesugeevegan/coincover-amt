@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - master
-env:
-  ENV: 'stage'
+# env:
+#   ENV: 'stage'
 
 jobs:
   run-k6:
@@ -26,4 +26,6 @@ jobs:
         run: npm install -g dotenv-cli
 
       - name: Run k6 tests
-        run: npm run test:pt
+        run: |
+          echo "ENV=stage" >> $GITHUB_ENV
+          npm run test:pt
