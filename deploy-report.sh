@@ -3,12 +3,16 @@
 # Run command while ignoring non-zero exit code
 set +e
 
-result="${TEST_TYPE}" == "pt" ? "dist/result.html" : "./allure-report"
+if [[ $TEST_TYPE == "pt" ]]; then
+    REPORT_PATH="./dist"
+else
+    REPORT_PATH="./allure-report"
+fi
 
 # Upload to S3
 aws s3 sync \
     --acl public-read \
-    ${result} \
+    ${REPORT_PATH} \
     s3://coincover-pj/${TEST_TYPE}/${date=$(date '+%Y-%m-%d')}
 upload_code=$?  # Keep the return code for the actual test run
 
