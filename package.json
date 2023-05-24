@@ -29,7 +29,7 @@
   "scripts": {
     "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=list,json,allure-playwright",
     "test:api": "npx playwright test ./tests/*.api.ts --reporter=list,json,allure-playwright",
-    "test:pt": "npm run build && dotenv -e .env k6 run --out json=test_results.json dist/example.pt.js",
+    "test:pt": "npm run build && docker-compose run -T xk6-browser run --out json=test_results.json dist/example.pt.js",
     "build": "npx webpack",
     "allure:report": "npx allure generate ./allure-results --clean"
   },
