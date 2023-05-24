@@ -3,22 +3,24 @@ on:
   push:
     branches:
       - master
+env:
+  ENV: 'stage'
 
 jobs:
-  test:
+  run-k6:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: install dependencies
-        run: |
-          npx webpack
-
-      - name: K6 test - examples.js
-        uses: grafana/k6-action@v0.2.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          filename: dist/example.pt.js
-          glags: --out json=test_results.json
+          node-version: '14'
 
-      - name: Stop Docker Compose
-        run: docker-compose down
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run k6 tests
+        run: npm run test:pt
