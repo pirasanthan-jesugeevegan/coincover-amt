@@ -6,7 +6,7 @@ set +e
 # Upload to S3
 aws s3 sync \
     --acl public-read \
-    ./allure-report \
+    ${TEST_TYPE == 'pt' ? 'dist/result.html' : './allure-report'} \
     s3://coincover-pj/${TEST_TYPE}/${date=$(date '+%Y-%m-%d')}
 upload_code=$?  # Keep the return code for the actual test run
 
