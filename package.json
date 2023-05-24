@@ -12,6 +12,7 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.18.6",
     "@playwright/test": "^1.33.0",
+    "@types/dotenv": "^8.2.0",
     "@types/k6": "^0.42.0",
     "@types/webpack": "^5.28.0",
     "allure-commandline": "^2.22.0",
@@ -19,7 +20,6 @@
     "babel-loader": "^9.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
-    "dotenv": "^16.0.3",
     "k6": "^0.0.0",
     "typescript": "^4.9.4",
     "webpack": "^5.75.0",
@@ -29,12 +29,13 @@
   "scripts": {
     "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=list,json,allure-playwright",
     "test:api": "npx playwright test ./tests/*.api.ts --reporter=list,json,allure-playwright",
-    "test:pt": "npm run build && docker-compose run -T xk6-browser run --out json=test_results.json dist/example.pt.js",
+    "test:pt": "npm run build && dotenv -e .env k6 run --out json=test_results.json dist/example.pt.js",
     "build": "npx webpack",
     "allure:report": "npx allure generate ./allure-results --clean"
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "dotenv-cli": "^7.2.1",
     "fs": "^0.0.1-security"
   }
 }
