@@ -5,6 +5,7 @@ interface ConfigSettings {
   onfido_baseurl: string;
   cc_result_fail: string;
   bearerToken: string;
+  test_url: string;
   integrationToken: string;
   callback_href: string;
 }
@@ -45,6 +46,7 @@ const config: ConfigSettings = {
   cc_result_pass: 'pass',
   cc_result_pending: 'pending',
   onfido_baseurl: 'https://api.eu.onfido.com',
+  test_url: 'https://jsonplaceholder.typicode.com',
   cc_result_fail: 'fail',
   bearerToken: API_KEY ?? '',
   integrationToken: INTEGRATION_KEY ?? '',

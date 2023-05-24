@@ -18,6 +18,7 @@ export let options: Options = {
 export default async function () {
   describe('01. Fetch public crocs', async (t: any) => {
     let responses = await getReq(http);
+    console.log(responses);
 
     t.expect(responses.status)
       .as('response status')
