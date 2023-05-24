@@ -10,13 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run k6
+      - name: install dependencies
         run: |
           npm install
 
-      - name: Run k6
-        run: |
-          npm run test:pt
+      - name: K6 test - examples.js
+        uses: grafana/k6-action@v0.2.0
+        with:
+          filename: dist/example.pt.js
+          glags: --out json=test_results.json
 
       - name: Stop Docker Compose
         run: docker-compose down
