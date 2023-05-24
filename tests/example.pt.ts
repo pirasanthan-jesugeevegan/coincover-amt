@@ -32,7 +32,7 @@ export function handleSummary(data: any) {
   console.log(data);
 
   return {
-    './dist/result.html': htmlReport(data),
+    './dist/index.html': htmlReport(data),
     stdout: textSummary(data, { indent: ' ', enableColors: true }),
   };
 }
