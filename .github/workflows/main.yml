@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Install gotenv-cli
-        run: install -g dotenv-cli
+        run: npm install -g dotenv-cli
 
       - name: Run k6 tests
         run: npm run test:pt
