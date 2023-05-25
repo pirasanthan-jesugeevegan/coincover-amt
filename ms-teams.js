@@ -3,24 +3,23 @@ const fs = require('fs');
 
 const TEST_TYPE = process.env.TEST_TYPE;
 const USER_NAME = process.env.USER_NAME;
-const today = new Date().toISOString().slice(0, 10);
 
-const filePath = './results.json'; // Replace with the actual file path
-// Read the JSON file
-const jsonContent = fs.readFileSync(filePath, 'utf-8');
-// Parse the JSON content
-const json = JSON.parse(jsonContent);
-// Extract the test results from the JSON
-const testResults = json.suites.flatMap((suite) =>
-  suite.specs.flatMap((spec) => spec.tests)
-);
-// Count the number of passed tests
-const passedTests = testResults.filter((test) =>
-  test.results.every((result) => result.status === 'passed')
-);
-const passedTestsCount = passedTests.length;
-// Calculate the total number of tests
-const totalTestsCount = testResults.length;
+const today = new Date().toISOString().slice(0, 10);
+const filePath = './results.json';
+const { totalTestsCount, passedTestsCount } = testResult(filePath);
+
+function testResult(filePath) {
+  const json = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const testResults = json.suites.flatMap((suite) =>
+    suite.specs.flatMap((spec) => spec.tests)
+  );
+  const passedTestsCount = testResults.filter((test) =>
+    test.results.every((result) => result.status === 'passed')
+  ).length;
+  const totalTestsCount = testResults.length;
+
+  return { totalTestsCount, passedTestsCount };
+}
 
 async function sendTeamsWebhook(webhookUrl, card) {
   try {
@@ -37,7 +36,6 @@ async function sendTeamsWebhook(webhookUrl, card) {
   }
 }
 
-// Replace 'YOUR_WEBHOOK_URL' with the actual webhook URL for your Microsoft Teams channel
 const webhookUrl =
   'https://daiprotect.webhook.office.com/webhookb2/66af9574-7257-438e-8045-a4fb43f8c61a@c904af66-46d2-4df0-b23c-5fb7ba5c0783/IncomingWebhook/1b595e7c71494f039425aaede0ea61dd/e9b9d08a-7124-4d52-a399-0e9717b11276';
 const url = `https://coincover-pj.s3.us-east-1.amazonaws.com/${TEST_TYPE}/${today}/index.html`;
