@@ -11,7 +11,7 @@ fi
 
 docker run \
     -v $PWD/dist:/dist \
-    ${AMT_RUNNER_DOCKER_IMAGE_CACHE} \
+    ${ECR_REGISTRY}/coincover:latest \
     test:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
