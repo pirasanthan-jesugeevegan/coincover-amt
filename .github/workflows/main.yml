@@ -1,31 +1,28 @@
-name: Load Testing with k6
+name: Docker Build & Push
 on:
   push:
-    branches:
-      - master
-# env:
-#   ENV: 'stage'
+    branches: ['master']
 
 jobs:
-  run-k6:
+  Docker:
+    name: Build Docker Image
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup AWS ECR Details
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: '14'
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{secrets.AWS_REGION}}
 
-      - name: Install dependencies
-        run: npm install
+      - name: Login to Amazon ECR
+        id: login-pf-aws-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Install gotenv-cli
-        run: npm install -g dotenv-cli
-
-      - name: Run k6 tests
+      - name: Build and push the tagged docker image to Amazon ECR
         run: |
-          echo "ENV=stage" >> $GITHUB_ENV
-          npm run test:pt
+          chmod +x scripts/build-push.sh
+          scripts/build-push.sh

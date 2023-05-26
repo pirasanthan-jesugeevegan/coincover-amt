@@ -22,29 +22,32 @@ jobs:
   Run_Test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - name: Install dependencies
-        run: npm i
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npm run test:${{ github.event.inputs.test_type }}
-      - name: generate report
-        run: npx allure generate ./allure-results --clean
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{secrets.AWS_REGION}}
-      - name: reploy report to s3
-        if: always()
+
+      - name: Login to Amazon ECR registry
+        id: login
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Pull Docker image from Amazon ECR
+        run: docker pull ${ECR_REGISTRY}/ennismore:latest
+        env:
+          ECR_REGISTRY: ${{ steps.login.outputs.registry }}
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Run Test, Generate Report & Upload to S3
         run: |
-          chmod +x ./deploy-report.sh
-          ./deploy-report.sh
+          chmod +x scripts/run.sh
+          scripts/run.sh
 
     # steps:
     #   - uses: actions/checkout@v2
