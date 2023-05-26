@@ -31,4 +31,6 @@ COPY . /app
 # Set the working directory
 WORKDIR /app
 
+RUN npm install
+
 ENTRYPOINT ["npm", "run"]
