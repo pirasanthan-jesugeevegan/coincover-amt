@@ -42,13 +42,14 @@ jobs:
           ECR_REGISTRY: ${{ steps.login.outputs.registry }}
 
       - name: Install dependencies
-        run: npm i
+        run: npm install
 
       - name: Run Test, Generate Report & Upload to S3
         run: |
           chmod +x scripts/run.sh
           scripts/run.sh
-
+        env:
+          ECR_REGISTRY: ${{ steps.login.outputs.registry }}
     # steps:
     #   - uses: actions/checkout@v2
 
