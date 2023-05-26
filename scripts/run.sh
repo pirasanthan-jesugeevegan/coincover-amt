@@ -11,7 +11,7 @@ fi
 
 docker run \
     -v $PWD/dist:/dist \
-    ${UI_RUNNER_DOCKER_IMAGE_CACHE} \
+    ${AMT_RUNNER_DOCKER_IMAGE_CACHE} \
     test:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 

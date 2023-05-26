@@ -37,7 +37,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Pull Docker image from Amazon ECR
-        run: docker pull ${ECR_REGISTRY}/ennismore:latest
+        run: docker pull ${ECR_REGISTRY}/coincover:latest
         env:
           ECR_REGISTRY: ${{ steps.login.outputs.registry }}
 
