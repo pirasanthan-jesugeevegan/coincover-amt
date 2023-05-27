@@ -3,6 +3,7 @@ interface ConfigSettings {
   cc_result_pass: string;
   cc_result_pending: string;
   onfido_baseurl: string;
+  local_url: string;
   cc_result_fail: string;
   bearerToken: string;
   test_url: string;
@@ -47,6 +48,7 @@ const config: ConfigSettings = {
   cc_result_pending: 'pending',
   onfido_baseurl: 'https://api.eu.onfido.com',
   test_url: 'https://jsonplaceholder.typicode.com',
+  local_url: 'http://localhost:3000/dev',
   cc_result_fail: 'fail',
   bearerToken: API_KEY ?? '',
   integrationToken: INTEGRATION_KEY ?? '',

@@ -29,13 +29,15 @@
   "scripts": {
     "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=list,json,allure-playwright",
     "test:api": "npx playwright test ./tests/*.api.ts --reporter=list,json,allure-playwright",
-    "test:pt": "k6 run --out json=test_results.json dist/example.pt.js",
+    "test:pt": "k6 run --out json=test_results.json dist/kds-key.pt.js",
     "build": "npx webpack",
     "allure:report": "npx allure generate ./allure-results --clean"
   },
   "dependencies": {
     "axios": "^1.4.0",
     "dotenv-cli": "^7.2.1",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13"
   }
 }
