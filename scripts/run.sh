@@ -15,6 +15,14 @@ docker run \
     test:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
+if [[ $TEST_TYPE != "pt" ]]; then
+docker run \
+    -v $PWD/dist:/dist \
+    ${ECR_REGISTRY}/coincover:latest \
+    allure:report
+report_code=$?  # Keep the return code for the actual test run
+fi
+
 # Upload to S3
 aws s3 sync \
     --acl public-read \
@@ -27,9 +35,9 @@ if [ $upload_code -eq 0 ]; then
     export ${TEST_TYPE}
     export ${USER_NAME}
     node ms-teams.js
-    report_code=$?
-fic
+    notification_code=$?
+fi
 
 
 # All 3 commands should have succeeded (code=0) for the script to be consider successful
-exit $((cmd_code + report_code + upload_code))
+exit $((cmd_code + report_code + upload_code + notification_code))
