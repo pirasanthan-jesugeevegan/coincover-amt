@@ -10,7 +10,7 @@ else
 fi
 
 docker run \
-    -v $PWD/dist:/dist \
+    -v $PWD:/app \
     ${ECR_REGISTRY}/coincover:latest \
     test:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
@@ -49,4 +49,4 @@ fi
 
 
 # All 3 commands should have succeeded (code=0) for the script to be consider successful
-exit $((cmd_code + report_code + notification_code))
+exit $((cmd_code + upload_code + notification_code))

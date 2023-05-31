@@ -7,7 +7,13 @@ RUN xk6 build --output "/tmp/k6" --with github.com/grafana/xk6-browser
 FROM debian:bullseye
 
 RUN apt-get update && \
-    apt-get install -y chromium
+    apt-get install -y chromium && \
+    apt-get install -y openjdk-11-jdk && \
+    apt-get install -y wget && \
+    wget https://github.com/allure-framework/allure2/releases/download/2.14.0/allure-2.14.0.tgz && \
+    tar -zxvf allure-2.14.0.tgz -C /opt/ && \
+    ln -s /opt/allure-2.14.0/bin/allure /usr/bin/allure && \
+    rm allure-2.14.0.tgz
 
 # Install Node.js and NPM
 RUN apt-get install -y curl
@@ -25,10 +31,23 @@ COPY --from=builder /tmp/k6 /usr/bin/k6
 ENV XK6_HEADLESS=true
 ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results.json
 
-# Copy everything from the local directory to the Docker image
-COPY . /app
-
 # Set the working directory
 WORKDIR /app
 
-ENTRYPOINT ["npm", "run"]
+# Copy package.json and package-lock.json to the Docker image
+COPY package.json package-lock.json /app/
+
+RUN JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))" && \
+    echo "export JAVA_HOME=$JAVA_HOME" >> /etc/profile.d/java.sh && \
+    echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/profile.d/java.sh && \
+    chmod +x /etc/profile.d/java.sh
+
+# Reload the environment variables
+RUN . /etc/profile.d/java.sh
+
+RUN npm install
+
+# Copy everything from the local directory to the Docker image
+COPY . /app
+
+CMD ["npm", "run"]
