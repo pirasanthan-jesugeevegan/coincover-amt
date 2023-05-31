@@ -51,6 +51,6 @@ RUN npm install
 COPY . /app
 
 # Run tests and generate Allure report
-# RUN npm run demo:api && npm run allure:report
+RUN npm run demo:api && npm run allure:report
 
 # ENTRYPOINT ["npm", "run"]
