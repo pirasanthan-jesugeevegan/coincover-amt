@@ -10,9 +10,9 @@ else
 fi
 
 docker run \
-    -v $PWD/dist:/dist \
+    -v $PWD:/app \
     ${ECR_REGISTRY}/coincover:latest \
-    demo:${TEST_TYPE}
+    npm run demo:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
 # if [[ $TEST_TYPE != "pt" ]]; then
@@ -28,7 +28,7 @@ docker run \
     sh -c "ls"
 
 docker run \
-    -v $PWD/dist:/dist \
+    -v $PWD:/app \
     ${ECR_REGISTRY}/coincover:latest \
     sh -c "ls"
 
