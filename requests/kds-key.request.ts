@@ -8,7 +8,6 @@ export async function postKey(
 ) {
   const { local_url } = ENV_VARS;
   const payload = payloadGenerator(request, headers, data);
-  console.log(payload);
 
   const response = await request.post(`${local_url}/key`, ...payload);
   return response;
