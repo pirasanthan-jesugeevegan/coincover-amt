@@ -6,7 +6,7 @@ set +e
 if [[ $TEST_TYPE == "pt" ]]; then
     REPORT_PATH="./dist"
 else
-    REPORT_PATH="allure-report"
+    REPORT_PATH="allure-results"
 fi
 
 docker run \
