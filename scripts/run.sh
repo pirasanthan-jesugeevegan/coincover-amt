@@ -10,8 +10,9 @@ else
 fi
 
 docker run \
+    -v $PWD/dist:/dist \
     ${ECR_REGISTRY}/coincover:latest \
-    npm run demo:${TEST_TYPE}
+    test:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
 # if [[ $TEST_TYPE != "pt" ]]; then
