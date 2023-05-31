@@ -1,14 +1,14 @@
-FROM golang:1.19-bullseye as builder
+# FROM golang:1.19-bullseye as builder
 
-RUN go install -trimpath go.k6.io/xk6/cmd/xk6@latest
+# RUN go install -trimpath go.k6.io/xk6/cmd/xk6@latest
 
-RUN xk6 build --output "/tmp/k6" --with github.com/grafana/xk6-browser
+# RUN xk6 build --output "/tmp/k6" --with github.com/grafana/xk6-browser
 
 FROM mcr.microsoft.com/playwright:v1.24.2-focal
 
-COPY --from=builder /tmp/k6 /usr/bin/k6
+# COPY --from=builder /tmp/k6 /usr/bin/k6
 
-ENV XK6_HEADLESS=true
+# ENV XK6_HEADLESS=true
 ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results.json
 
 # Set the working directory
@@ -22,4 +22,5 @@ RUN npm install
 # Copy everything from the local directory to the Docker image
 COPY . /app
 
-CMD [""]
+# Run the shell script to execute the tests and publish the results to S3
+CMD ["./scripts/run.sh"]
