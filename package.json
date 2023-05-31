@@ -15,8 +15,6 @@
     "@types/dotenv": "^8.2.0",
     "@types/k6": "^0.42.0",
     "@types/webpack": "^5.28.0",
-    "allure-commandline": "^2.22.0",
-    "allure-playwright": "^2.3.0",
     "babel-loader": "^9.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
@@ -27,14 +25,13 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "scripts": {
-    "demo:ui": "npx playwright test ./tests/demo.ui.ts --reporter=list,json,allure-playwright",
-    "demo:api": "npx playwright test ./tests/demo.api.ts --reporter=list,json,allure-playwright",
+    "demo:ui": "npx playwright test ./tests/demo.ui.ts --reporter=list,html",
+    "demo:api": "npx playwright test ./tests/demo.api.ts --reporter=list,html",
     "demo:pt": "npm run build && k6 run --out json=test_results.json dist/demo.pt.js",
-    "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=list,json,allure-playwright",
-    "test:api": "npx playwright test ./tests/*.api.ts --reporter=list,json,allure-playwright",
+    "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=list,html",
+    "test:api": "npx playwright test ./tests/*.api.ts --reporter=list,html",
     "test:pt": "k6 run --out json=test_results.json dist/kds-key.pt.js",
-    "build": "npx webpack",
-    "allure:report": "npx allure generate allure-results --clean"
+    "build": "npx webpack"
   },
   "dependencies": {
     "axios": "^1.4.0",

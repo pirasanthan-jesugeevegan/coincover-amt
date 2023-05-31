@@ -10,3 +10,4 @@
 **/node_modules/
 allure-results
 test-results
+playwright-report

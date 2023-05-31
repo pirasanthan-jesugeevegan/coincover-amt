@@ -6,7 +6,7 @@ set +e
 if [[ $TEST_TYPE == "pt" ]]; then
     REPORT_PATH="./dist"
 else
-    REPORT_PATH="./allure-report"
+    REPORT_PATH="./playwright-report"
 fi
 
 docker run \
@@ -15,13 +15,13 @@ docker run \
     npm run demo:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
-if [[ $TEST_TYPE != "pt" ]]; then
-docker run \
-    -v $PWD/dist:/dist \
-    ${ECR_REGISTRY}/coincover:latest \
-    npm run allure:report
-report_code=$?  # Keep the return code for the actual test run
-fi
+# if [[ $TEST_TYPE != "pt" ]]; then
+# docker run \
+#     -v $PWD/dist:/dist \
+#     ${ECR_REGISTRY}/coincover:latest \
+#     npm run allure:report
+# report_code=$?  # Keep the return code for the actual test run
+# fi
 
 docker run \
     ${ECR_REGISTRY}/coincover:latest \
@@ -31,6 +31,7 @@ docker run \
     -v $PWD/dist:/dist \
     ${ECR_REGISTRY}/coincover:latest \
     sh -c "ls"
+
 # Upload to S3
 aws s3 sync \
     --acl public-read \
@@ -48,4 +49,4 @@ fi
 
 
 # All 3 commands should have succeeded (code=0) for the script to be consider successful
-exit $((cmd_code + report_code + upload_code + notification_code))
+exit $((cmd_code + report_code + notification_code))

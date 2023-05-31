@@ -50,7 +50,4 @@ RUN npm install
 # Copy everything from the local directory to the Docker image
 COPY . /app
 
-# Run tests and generate Allure report
-RUN npm run demo:api && npm run allure:report
-
-# ENTRYPOINT ["npm", "run"]
+ENTRYPOINT ["npm", "run"]
