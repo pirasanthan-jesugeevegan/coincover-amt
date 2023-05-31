@@ -6,23 +6,32 @@ set +e
 if [[ $TEST_TYPE == "pt" ]]; then
     REPORT_PATH="./dist"
 else
-    REPORT_PATH="allure-results"
+    REPORT_PATH="./allure-results"
 fi
 
+ls /app
 docker run \
     -v $PWD/dist:/dist \
     ${ECR_REGISTRY}/coincover:latest \
-    demo:${TEST_TYPE}
+    npm run demo:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
 if [[ $TEST_TYPE != "pt" ]]; then
 docker run \
     -v $PWD/dist:/dist \
     ${ECR_REGISTRY}/coincover:latest \
-    allure:report
+    npm run allure:report
 report_code=$?  # Keep the return code for the actual test run
 fi
 
+docker run \
+    ${ECR_REGISTRY}/coincover:latest \
+    sh -c "ls"
+
+docker run \
+    -v $PWD/dist:/dist \
+    ${ECR_REGISTRY}/coincover:latest \
+    sh -c "ls"
 # Upload to S3
 aws s3 sync \
     --acl public-read \
