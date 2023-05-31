@@ -12,7 +12,7 @@ fi
 docker run \
     -v $PWD:/app \
     ${ECR_REGISTRY}/coincover:latest \
-    test:${TEST_TYPE}
+    demo:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
 # if [[ $TEST_TYPE != "pt" ]]; then
