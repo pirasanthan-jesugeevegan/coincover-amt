@@ -8,7 +8,12 @@ FROM debian:bullseye
 
 RUN apt-get update && \
     apt-get install -y chromium && \
-    apt-get install -y openjdk-11-jdk
+    apt-get install -y openjdk-11-jdk && \
+    apt-get install -y wget && \
+    wget https://github.com/allure-framework/allure2/releases/download/2.14.0/allure-2.14.0.tgz && \
+    tar -zxvf allure-2.14.0.tgz -C /opt/ && \
+    ln -s /opt/allure-2.14.0/bin/allure /usr/bin/allure && \
+    rm allure-2.14.0.tgz
 
 # Install Node.js and NPM
 RUN apt-get install -y curl
@@ -29,8 +34,8 @@ ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results.json
 # Set the working directory
 WORKDIR /app
 
-# Copy everything from the local directory to the Docker image
-COPY . /app
+# Copy package.json and package-lock.json to the Docker image
+COPY package.json package-lock.json /app/
 
 RUN JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))" && \
     echo "export JAVA_HOME=$JAVA_HOME" >> /etc/profile.d/java.sh && \
@@ -41,5 +46,11 @@ RUN JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))" && \
 RUN . /etc/profile.d/java.sh
 
 RUN npm install
+
+# Copy everything from the local directory to the Docker image
+COPY . /app
+
+# Run tests and generate Allure report
+# RUN npm run demo:api && npm run allure:report
 
 ENTRYPOINT ["npm", "run"]

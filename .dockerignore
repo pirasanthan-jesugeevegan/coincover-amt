@@ -1,2 +1,12 @@
+.dockerignore
+.env
 .git
-.github
+.gitignore
+.vs
+.vscode
+*/bin
+*/obj
+**/.toolstarget
+**/node_modules/
+allure-results
+test-results
