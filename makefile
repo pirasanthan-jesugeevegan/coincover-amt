@@ -1,10 +1,8 @@
 build:
-	npm run build && docker build -t 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest .   
-report:
-	docker run 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest npm run allure:report
+	npm run build && docker build -t 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest .
+
 run:
-	docker run -v ${PWD}:/app 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest npm run demo:api
+	docker run -v $(PWD):/app 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest
 
 look:
-	docker run -v ${PWD}:/app 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest bash
-	
+	docker run -it 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest ls /app

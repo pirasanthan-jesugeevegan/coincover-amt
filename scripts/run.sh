@@ -6,13 +6,12 @@ set +e
 if [[ $TEST_TYPE == "pt" ]]; then
     REPORT_PATH="./dist"
 else
-    REPORT_PATH="./playwright-report"
+    REPORT_PATH="../playwright-report"
 fi
 
 docker run \
     -v $PWD:/app \
-    ${ECR_REGISTRY}/coincover:latest \
-    demo:${TEST_TYPE}
+    ${ECR_REGISTRY}/coincover:latest 
 cmd_code=$?  # Keep the return code for the actual test run
 
 # if [[ $TEST_TYPE != "pt" ]]; then
