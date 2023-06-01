@@ -8,3 +8,5 @@
 */obj
 **/.toolstarget
 **/node_modules/
+playwright-report
+results.json
