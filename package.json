@@ -26,11 +26,11 @@
     "webpack-glob-entries": "^1.0.1"
   },
   "scripts": {
-    "demo:ui": "ALLURE_RESULTS_DIR=allure-results npx playwright test ./tests/demo.ui.ts -c ./config/ui.playwright.config.ts --reporter=json,list,allure-playwright",
-    "demo:api": "npx playwright test ./tests/demo.api.ts -c ./config/api.playwright.config.ts --reporter=json,list,allure-playwright",
+    "demo:ui": "npx playwright test ./tests/demo.ui.ts -c ./config/ui-playwright.config.ts --reporter=json,list,allure-playwright",
+    "demo:api": "npx playwright test ./tests/demo.api.ts -c ./config/api-playwright.config.ts --reporter=json,list,allure-playwright",
     "demo:pt": "npm run build && k6 run --out json=test_results.json dist/demo.pt.js",
-    "test:ui": "npx playwright test ./tests/*.ui.ts --reporter=json,list,html",
-    "test:api": "npx playwright test ./tests/*.api.ts --reporter=json,list,html",
+    "test:ui": "npx playwright test ./tests/*.ui.ts -c ./config/ui-playwright.config.ts --reporter=json,list,allure-playwright",
+    "test:api": "npx playwright test ./tests/*.api.ts -c ./config/api-playwright.config.ts --reporter=json,list,allure-playwright",
     "test:pt": "k6 run --out json=test_results.json dist/kds-key.pt.js",
     "build": "npx webpack",
     "report": "allure generate allure-results -o allure-report --clean"

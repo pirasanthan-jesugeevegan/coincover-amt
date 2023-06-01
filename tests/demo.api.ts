@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getReq } from '../requests/request';
+import { getReq } from '../requests/example.request';
 
 test('check API', async ({ request }) => {
   const response = await getReq(request);
