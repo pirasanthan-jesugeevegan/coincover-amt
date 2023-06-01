@@ -6,6 +6,9 @@ dist
 /playwright/.cache/
 .bin/
 .DS_Store
+
+# Report
 allure-report
 allure-results
 results.json
+test_results.json

@@ -46,14 +46,6 @@ const card = {
       name: 'Triggered by',
       value: USER_NAME,
     },
-    {
-      name: 'Result',
-      value: `Number of passed tests: ${passedTestsCount} out of ${totalTestsCount}`,
-    },
-    {
-      name: 'Status',
-      value: passedTestsCount === totalTestsCount ? 'PASSED' : 'FAILED',
-    },
   ],
   markdown: true,
   potentialAction: [
@@ -65,4 +57,19 @@ const card = {
   ],
 };
 
+if (TEST_TYPE !== 'pt') {
+  const result = `Number of passed tests: ${passedTestsCount} out of ${totalTestsCount}`;
+  const status = passedTestsCount === totalTestsCount ? 'PASSED' : 'FAILED';
+
+  card.facts.push(
+    {
+      name: 'Result',
+      value: result,
+    },
+    {
+      name: 'Status',
+      value: status,
+    }
+  );
+}
 sendTeamsWebhook(webhookUrl, card);

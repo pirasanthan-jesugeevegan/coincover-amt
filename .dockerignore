@@ -10,3 +10,4 @@
 **/node_modules/
 playwright-report
 results.json
+test_results.json
