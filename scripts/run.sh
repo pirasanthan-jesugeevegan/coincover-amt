@@ -6,7 +6,7 @@ set +e
 if [[ $TEST_TYPE == "pt" ]]; then
     REPORT_PATH="./dist"
 else
-    REPORT_PATH="../playwright-report"
+    REPORT_PATH="./playwright-report"
 fi
 
 docker run \
