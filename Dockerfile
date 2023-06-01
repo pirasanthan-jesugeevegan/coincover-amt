@@ -50,4 +50,4 @@ RUN npm install
 # Copy everything from the local directory to the Docker image
 COPY . /app
 
-CMD ["npm", "run", "demo:api"]
+CMD ["npm", "run"]
