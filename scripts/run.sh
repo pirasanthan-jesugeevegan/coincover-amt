@@ -15,21 +15,13 @@ docker run \
     demo:${TEST_TYPE}
 cmd_code=$?  # Keep the return code for the actual test run
 
+# Generate report only if its UI || API test
 if [[ $TEST_TYPE != "pt" ]]; then
 docker run \
     -v $PWD:/app \
     ${ECR_REGISTRY}/coincover:latest \
     report
 fi
-
-docker run \
-    ${ECR_REGISTRY}/coincover:latest \
-    sh -c "ls"
-
-docker run \
-    -v $PWD:/app \
-    ${ECR_REGISTRY}/coincover:latest \
-    sh -c "ls"
 
 # Upload to S3
 aws s3 sync \
@@ -38,7 +30,7 @@ aws s3 sync \
     s3://coincover-pj/${TEST_TYPE}/${date=$(date '+%Y-%m-%d')}
 upload_code=$?  # Keep the return code for the actual test run
 
-# Generate report
+# Send notifcation to Teams
 if [ $upload_code -eq 0 ]; then
     export ${TEST_TYPE}
     export ${USER_NAME}

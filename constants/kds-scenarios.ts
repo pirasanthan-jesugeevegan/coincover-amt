@@ -4,7 +4,7 @@ const key_types = ['gpg', 'rsa4096', 'rsa2048', 'ed25519', 'secp256k1'];
 export const scenarios = [
   {
     test_title:
-      'Verify that with an invalid header and valid body should return a 401 Unauthorized reponse',
+      'Verify that with an invalid header and valid body should return a 401 Unauthorized response',
     headers: {
       Authorization: `Bearer InvalidToken`,
     },
@@ -22,7 +22,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with an empty header and valid body should return a 401 Unauthorized reponse',
+      'Verify that with an empty header and valid body should return a 401 Unauthorized response',
     headers: {},
     body: {
       userEmail: 'test@test.com',
@@ -38,7 +38,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with an invalid header and invalid body should return a 401 Unauthorized reponse',
+      'Verify that with an invalid header and invalid body should return a 401 Unauthorized response',
     headers: { Authorization: `Bearer InvalidToken` },
     body: {
       userEmail: '',
@@ -54,7 +54,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with an valid header and invalid body payload should return a 400 Bad Request reponse',
+      'Verify that with an valid header and invalid body payload should return a 400 Bad Request response',
     headers: {
       Authorization: `Bearer ${validToken}`,
     },
@@ -81,7 +81,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with an valid header and body payload with invalid email should return a 400 Bad Request reponse',
+      'Verify that with an valid header and body payload with invalid email should return a 400 Bad Request response',
     headers: { Authorization: `Bearer ${validToken}` },
     body: {
       userEmail: 'testtest.com',
@@ -97,7 +97,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with a valid header and invalid body (userID empty) should return a 400 Bad Request reponse',
+      'Verify that with a valid header and invalid body (userID empty) should return a 400 Bad Request response',
     headers: { Authorization: `Bearer ${validToken}` },
     body: {
       userEmail: 'test@test.com',
@@ -117,7 +117,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with a valid header and invalid body (walletId empty) should return a 400 Bad Request reponse',
+      'Verify that with a valid header and invalid body (walletId empty) should return a 400 Bad Request response',
     headers: { Authorization: `Bearer ${validToken}` },
     body: {
       userEmail: 'test@test.com',
@@ -137,7 +137,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with a valid header and invalid body (type empty) should return a 400 Bad Request reponse',
+      'Verify that with a valid header and invalid body (type empty) should return a 400 Bad Request response',
     headers: { Authorization: `Bearer ${validToken}` },
     body: {
       userEmail: 'test@test.com',
@@ -155,7 +155,7 @@ export const scenarios = [
   },
   {
     test_title:
-      'Verify that with a valid header and invalid body (invalid key type) should return a 400 Bad Request reponse',
+      'Verify that with a valid header and invalid body (invalid key type) should return a 400 Bad Request response',
     headers: { Authorization: `Bearer ${validToken}` },
     body: {
       userEmail: 'test@test.com',

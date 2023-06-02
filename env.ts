@@ -47,7 +47,7 @@ const config: ConfigSettings = {
   cc_result_pass: 'pass',
   cc_result_pending: 'pending',
   onfido_baseurl: 'https://api.eu.onfido.com',
-  test_url: 'https://jsonplaceholder.typicode.com',
+  test_url: 'https://test-api.k6.io',
   local_url: 'http://localhost:3000/dev',
   cc_result_fail: 'fail',
   bearerToken: API_KEY ?? '',

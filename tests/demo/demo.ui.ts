@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { clickCheckboxOnk6 } from '../utils/action';
+import { clickCheckboxOnk6 } from '../../utils/action';
 
 test('checkbox should have been clicked', async ({ page }) => {
   await clickCheckboxOnk6(page);
