@@ -46,16 +46,21 @@ async function sendTeamsWebhook(webhookUrl, payload) {
   if (TEST_TYPE !== 'pt') {
     try {
       const json = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-      const testResults = json.suites.flatMap((suite) =>
-        suite.specs.flatMap((spec) => spec.tests)
-      );
-      const passedTestsCount = testResults.filter((test) =>
-        test.results.every((result) => result.status === 'passed')
-      ).length;
-      const totalTestsCount = testResults.length;
+      let totalPassedTests = 0;
+      let totalTests = 0;
 
-      const result = `Number of passed tests: ${passedTestsCount} out of ${totalTestsCount}`;
-      const status = passedTestsCount === totalTestsCount ? 'PASSED' : 'FAILED';
+      json.suites.forEach((suite) => {
+        suite.suites.forEach((suite) => {
+          totalTests += suite.specs.length;
+          const passedTests = suite.specs.reduce((count, spec) => {
+            return spec.ok == true ? count + 1 : count;
+          }, 0);
+          totalPassedTests += passedTests;
+        });
+      });
+
+      const result = `Number of passed tests: ${totalPassedTests} out of ${totalTests}`;
+      const status = totalPassedTests === totalTests ? 'PASSED' : 'FAILED';
 
       payload.sections[0].facts.push(
         {
