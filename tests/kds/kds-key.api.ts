@@ -30,7 +30,7 @@ test.describe('KDS - Key endpoint', () => {
       expect(body).toMatchObject(scenario.response);
     });
   }
-
+  //TODO: Happy Path - One test case with coin type and one with type
   //   test('Verify that with valid key details that GPG key is successfully assigning with 200 status code', async ({
   //     request,
   //   }) => {
@@ -42,5 +42,5 @@ test.describe('KDS - Key endpoint', () => {
   //     const response = await postKey(request, headers, body);
   //     const res = await response.json();
   //     console.log(res);
-  //   });
+  //   });\
 });
