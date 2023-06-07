@@ -9,4 +9,6 @@ dist
 
 # Report
 allure-report
-results
+allure-results
+results.json
+test_results.json

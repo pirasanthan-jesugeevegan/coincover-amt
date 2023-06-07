@@ -29,7 +29,7 @@ RUN npm i playwright
 COPY --from=builder /tmp/k6 /usr/bin/k6
 
 ENV XK6_HEADLESS=true
-ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results/results.json
+ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results.json
 
 # Set the working directory
 WORKDIR /app
