@@ -1,5 +1,5 @@
 import type { APIRequestContext } from '@playwright/test/types/test';
-import { ENV_VARS } from '../env';
+import { ENV_VARS } from '../utils/env';
 import { payloadGenerator } from '../utils/header-generator';
 
 export function createUser(

@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import { goToHomePage, clickCheckbox } from '../../utils/action';
-import { ElementToHaveText } from '../../utils/assert';
+import { goToHomePage, clickCheckbox } from '../../helper/action.helper';
+import { ElementToHaveText } from '../../helper/assert.helper';
 
 test('checkbox should have been clicked', async ({ page }) => {
   //Given the user navigates to the home page
