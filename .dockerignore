@@ -8,8 +8,6 @@
 */obj
 **/.toolstarget
 **/node_modules/
+
 allure-report
-allure-results
-playwright-report
-results.json
-test_results.json
+results
