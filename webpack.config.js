@@ -6,7 +6,7 @@ const { IgnorePlugin } = require('webpack');
 
 module.exports = {
   mode: 'production',
-  entry: GlobEntries('./tests/**/*pt.ts'), // Generates multiple entry for each test
+  entry: GlobEntries('./src/tests/**/*pt.ts'), // Generates multiple entry for each test
   output: {
     path: path.join(__dirname, 'dist'),
     libraryTarget: 'commonjs',
@@ -15,7 +15,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      '@requests': path.resolve(__dirname, 'requests'),
+      '@requests': path.resolve(__dirname, './src/requests'),
     },
   },
   module: {
@@ -41,7 +41,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'assets'),
+          from: path.resolve(__dirname, './src/assets'),
           noErrorOnMissing: true,
         },
       ],

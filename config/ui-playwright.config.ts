@@ -4,7 +4,7 @@ import baseConfig from '../playwright.config';
 const { ...rest } = baseConfig;
 
 const config: PlaywrightTestConfig = {
-  testDir: '../tests',
+  testDir: '../src/tests/',
   testMatch: ['**/tests/*/*.ui.ts'],
   ...rest,
 };
