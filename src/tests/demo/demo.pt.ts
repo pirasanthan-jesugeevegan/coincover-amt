@@ -1,6 +1,7 @@
 import { Options } from 'k6/options';
 import http from 'k6/http';
-import { createUser, login, createCrocodiles } from '@requests/example.request';
+import { post } from '@helper/request.helper';
+import { ENV_VARS } from '@utils/env';
 import { describe } from 'https://jslib.k6.io/functional/0.0.3/index.js';
 import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js';
 import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js';
@@ -24,10 +25,10 @@ export let options: Options = {
 let authToken;
 const PASSWORD = 'superCroc2019';
 const USERNAME = `testuser_${randomIntBetween(1, 10000000)}@coin.com`;
-
+const { test_url } = ENV_VARS;
 export function authTest() {
   describe(`01. Create a test user ${USERNAME}`, (t: any) => {
-    let responses = createUser(http, {
+    let responses = post(http, `${test_url}/user/register/`, {
       username: USERNAME,
       password: PASSWORD,
     });
@@ -38,7 +39,7 @@ export function authTest() {
       .toHaveValidJson();
   });
   describe(`02. Authenticate the new user ${USERNAME}`, (t) => {
-    let responses = login(http, {
+    let responses = post(http, `${test_url}/auth/token/login/`, {
       username: USERNAME,
       password: PASSWORD,
     });
@@ -61,7 +62,7 @@ export function authTest() {
     const headers = {
       Authorization: `Bearer ${authToken}`,
     };
-    let resp = createCrocodiles(http, data, headers);
+    let resp = post(http, `${test_url}/my/crocodiles/`, data, headers);
 
     t.expect(resp.status)
       .as('Croc creation status')

@@ -22,7 +22,9 @@
       "emitDecoratorMetadata": true,
       "skipLibCheck": true,
       "paths": {
-        "@requests/*": ["./src/requests/*"]
+        "@requests/*": ["./src/requests/*"],
+        "@helper/*": ["./src/helper/*"],
+        "@utils/*": ["./src/utils/*"]
       }
     }
   }

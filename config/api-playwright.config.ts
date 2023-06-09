@@ -5,7 +5,7 @@ const { ...rest } = baseConfig;
 
 const config: PlaywrightTestConfig = {
   testDir: '../src/tests/',
-  testMatch: ['**/tests/*/*.api.ts'],
+  testMatch: ['*.api.ts'],
   use: {
     headless: true,
   },

@@ -1,9 +1,11 @@
 import { test } from '@playwright/test';
-import { createUser } from '../../requests/example.request';
+import { post } from '../../helper/request.helper';
+import { ENV_VARS } from './../../utils/env';
 import { expect } from 'chai';
 import { v4 as uuidv4 } from 'uuid';
 
-test.describe(`Happy Path - Register User Endpoint`, async () => {
+const { test_url } = ENV_VARS;
+test.describe(`Happy Path - Register User Endpoint @test`, async () => {
   //Given the positive data
   const payload = {
     username: `testuser${uuidv4()}_@coin.com`,
@@ -15,7 +17,7 @@ test.describe(`Happy Path - Register User Endpoint`, async () => {
     request,
   }) => {
     //When the request is sent
-    const response = await createUser(request, {
+    const response = await post(request, `${test_url}/user/register/`, {
       ...payload,
       password: 'superCroc2019',
     });
@@ -31,7 +33,7 @@ test.describe(`Unhappy Path - Register User Endpoint`, async () => {
   }) => {
     //Given the request is empty string
     //When the request is sent
-    const response = await createUser(request, {});
+    const response = await post(request, `${test_url}/user/register/`, {});
     //Then the response should be a 400 & 'This field is required.' & 'This field is required.'
     expect(await response.status()).to.equal(400);
     expect(await response.json()).to.deep.equal({
@@ -45,7 +47,7 @@ test.describe(`Unhappy Path - Register User Endpoint`, async () => {
   }) => {
     //Given the request only has username
     //When the request is sent
-    const response = await createUser(request, {
+    const response = await post(request, `${test_url}/user/register/`, {
       username: 'coin_password',
     });
     //Then the response should be a 400 & 'This field is required.'
@@ -59,7 +61,7 @@ test.describe(`Unhappy Path - Register User Endpoint`, async () => {
   }) => {
     //Given the request only has password
     //When the request is sent
-    const response = await createUser(request, {
+    const response = await post(request, `${test_url}/user/register/`, {
       password: 'password',
     });
     //Then the response should be a 400 & 'This field is required.'
@@ -73,7 +75,7 @@ test.describe(`Unhappy Path - Register User Endpoint`, async () => {
   }) => {
     //Given the request has exisiting username
     //When the request is sent
-    const response = await createUser(request, {
+    const response = await post(request, `${test_url}/user/register/`, {
       username: 'username',
       password: 'password',
     });

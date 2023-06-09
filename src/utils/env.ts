@@ -1,5 +1,7 @@
 interface ConfigSettings {
   baseurl: string;
+  baseUrl_TP: string;
+  stdTxnToken: string;
   cc_result_pass: string;
   cc_result_pending: string;
   onfido_baseurl: string;
@@ -14,9 +16,13 @@ interface ConfigSettings {
 const ALL_ENV_VARS = {
   dev: {
     baseurl: 'https://ledger-idv.dev-consumer.coincover.com',
+    baseUrl_TP: 'https://api.txm-dev.coincover.com',
+    stdTxnToken: '1a39d4eb-38b5-48ab-9062-0513bce1ef4a',
   },
   stage: {
     baseurl: 'https://ledger-idv.staging-consumer.coincover.com',
+    baseUrl_TP: 'https://api.txm-staging.coincover.com',
+    stdTxnToken: '1a39d4eb-38b5-48ab-9062-0513bce1ef4a',
   },
 };
 
