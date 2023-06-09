@@ -51,7 +51,7 @@ test.describe('Negative Path - POST/user endpoint @tp', async () => {
     });
   });
 
-  test('Verify that the user cannot access the service with an invalid bearer token @test', async ({
+  test('Verify that the user cannot access the service with an invalid bearer token', async ({
     request,
   }) => {
     //Given the user provides an invalid bearer token

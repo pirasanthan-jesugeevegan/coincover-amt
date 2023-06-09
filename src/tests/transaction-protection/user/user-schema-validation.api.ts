@@ -405,7 +405,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
   // DOB
   //////////////////////////////////////
   //BUG
-  // test('Verify that when invalid dob in the body should return a 400 Bad Request @test', async ({
+  // test('Verify that when invalid dob in the body should return a 400 Bad Request', async ({
   //   request,
   // }) => {
   //   //Given that invalid dob is in body payload
@@ -427,7 +427,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
   //   });
   // });
 
-  // test('Verify that when incorrect formate of dob in the body should return a 400 Bad Request @test', async ({
+  // test('Verify that when incorrect formate of dob in the body should return a 400 Bad Request', async ({
   //   request,
   // }) => {
   //   //Given that invalid dob formate is in body payload
@@ -452,7 +452,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
   //////////////////////////////////////
   // residenceCountry
   //////////////////////////////////////
-  test('Verify that when residenceCountry is not a string in the body should return a 400 Bad Request @test', async ({
+  test('Verify that when residenceCountry is not a string in the body should return a 400 Bad Request', async ({
     request,
   }) => {
     //Given that residenceCountry is not a string and is in body payload
@@ -472,7 +472,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
     );
   });
 
-  test('Verify that when invalid residenceCountry in the body should return a 400 Bad Request @test', async ({
+  test('Verify that when invalid residenceCountry in the body should return a 400 Bad Request', async ({
     request,
   }) => {
     //Given that invalid residenceCountry is in body payload
@@ -495,7 +495,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
   // nationality
   //////////////////////////////////////
   //BUG
-  // test('Verify that when nationality is not a string in the body should return a 400 Bad Request @test', async ({
+  // test('Verify that when nationality is not a string in the body should return a 400 Bad Request', async ({
   //   request,
   // }) => {
   //   //Given that nationality is not a string and is in body payload
