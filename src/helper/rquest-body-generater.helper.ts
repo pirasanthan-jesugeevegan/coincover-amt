@@ -37,3 +37,17 @@ export const generateUserPlanRequestBody = (
   levelUsd: Math.floor(Math.random() * (4000 - 1000) + 1000),
   ...(overrides ? overrides : {}),
 });
+
+export const generateFullKeyRequestBody = (
+  overrides: Record<string, any> = {}
+) => ({
+  userEmail: 'automation.test@email.com',
+  userId: Math.floor(
+    Math.random() * (10000000000000 - 900000) + 900000
+  ).toString(),
+  walletId: Math.floor(
+    Math.random() * (10000000000000 - 900000) + 900000
+  ).toString(),
+  type: 'gpg',
+  ...(overrides ? overrides : {}),
+});
