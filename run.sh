@@ -88,7 +88,7 @@ upload_code=$?  # Keep the return code for the actual test run
 
 # Send notifcation to Teams
 if [ $upload_code -eq 0 ]; then
-    export ${type}
+    export ${TEST_TYPE=$type}
     export ${USER_NAME}
     node ms-teams.js
     notification_code=$?

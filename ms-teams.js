@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs/promises');
 
-const TEST_TYPE = process.env.type;
+const TEST_TYPE = process.env.TEST_TYPE;
 const USER_NAME = process.env.USER_NAME;
 
 const today = new Date().toISOString().slice(0, 10);
