@@ -26,6 +26,10 @@ RUN apt-get install -y libnss3-dev libx11-xcb-dev libxcb-dri3-dev libxcomposite1
 # Install Playwright with its browsers
 RUN npm i playwright
 
+# Install AWS CLI
+RUN apt-get install -y python3-pip && \
+    pip3 install awscli --upgrade
+
 COPY --from=builder /tmp/k6 /usr/bin/k6
 
 ENV XK6_HEADLESS=true
