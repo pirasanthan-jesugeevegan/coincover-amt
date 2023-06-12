@@ -54,7 +54,10 @@ jobs:
         run: docker pull ${ECR_REGISTRY}/coincover:latest
         env:
           ECR_REGISTRY: ${{ steps.login.outputs.registry }}
-          
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Run Test, Generate Report & Upload to S3
         run: |
           docker run \

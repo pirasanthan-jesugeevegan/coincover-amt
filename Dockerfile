@@ -35,14 +35,11 @@ COPY --from=builder /tmp/k6 /usr/bin/k6
 ENV XK6_HEADLESS=true
 ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results.json
 # Set AWS credentials
-ARG aws-access-key-id
-ARG aws-secret-access-key
-ARG aws-region
-ARG user_name
-ENV AWS_ACCESS_KEY_ID=$aws-access-key-id
-ENV AWS_SECRET_ACCESS_KEY=$aws-secret-access-key
-ENV AWS_REGION=$aws-region
-ENV USER_NAME=$user_name
+ENV AWS_ACCESS_KEY_ID=
+ENV AWS_SECRET_ACCESS_KEY=
+ENV AWS_REGION=
+ENV USER_NAME=
+
 # Set the working directory
 WORKDIR /app
 
