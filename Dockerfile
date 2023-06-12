@@ -59,4 +59,4 @@ RUN npm install
 # Copy everything from the local directory to the Docker image
 COPY . /app
 
-ENTRYPOINT ["/app/run.sh"]
+ENTRYPOINT ["/app/scripts/run.sh"]
