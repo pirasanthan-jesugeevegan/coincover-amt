@@ -62,7 +62,6 @@ done
 export ENV=$env
 
 # Display the values of the parameters
-echo "" # new line
 echo "Env: $env"
 echo "Type of Test: $type"
 echo "Product to Test: $product"
