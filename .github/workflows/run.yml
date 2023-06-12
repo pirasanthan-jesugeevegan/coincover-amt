@@ -64,8 +64,8 @@ jobs:
           --build-arg aws-access-key-id=${{ secrets.AWS_ACCESS_KEY_ID }} \
           --build-arg aws-secret-access-key=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
           --build-arg aws-region=${{ secrets.AWS_REGION }} \
-          -v $(PWD):/app \
-          ${ECR_REGISTRY}/coincover:latest --env ${{ github.event.inputs.env }} --type ${{ github.event.inputs.test_type }} --product ${{ github.event.inputs.product }} --file demo
+          -v "$(pwd)":/app \
+          "${ECR_REGISTRY}/coincover:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
         env:
           ECR_REGISTRY: ${{ steps.login.outputs.registry }}
     # steps:
