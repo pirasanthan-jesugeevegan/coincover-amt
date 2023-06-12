@@ -59,7 +59,4 @@ RUN npm install
 # Copy everything from the local directory to the Docker image
 COPY . /app
 
-# Set the execution permission on the script
-RUN chmod +x /app/scripts/run.sh
-
-ENTRYPOINT ["/app/scripts/run.sh"]
+ENTRYPOINT ["/app/run.sh"]
