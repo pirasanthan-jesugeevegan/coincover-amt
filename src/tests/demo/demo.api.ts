@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import { v4 as uuidv4 } from 'uuid';
 
 const { test_url } = ENV_VARS;
-test.describe(`Happy Path - Register User Endpoint @test`, async () => {
+test.describe('Happy Path - Register User Endpoint @demo', async () => {
   //Given the positive data
   const payload = {
     username: `testuser${uuidv4()}_@coin.com`,
@@ -27,7 +27,7 @@ test.describe(`Happy Path - Register User Endpoint @test`, async () => {
   });
 });
 
-test.describe(`Unhappy Path - Register User Endpoint`, async () => {
+test.describe('Unhappy Path - Register User Endpoint @demo', async () => {
   test('Verify that with an empty body payload should return a 400 Bad Request response', async ({
     request,
   }) => {

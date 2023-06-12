@@ -40,7 +40,7 @@ ARG aws-secret-access-key
 ARG aws-region
 ENV AWS_ACCESS_KEY_ID=$aws-access-key-id
 ENV AWS_SECRET_ACCESS_KEY=$aws-secret-access-key
-ENV AWS_DEFAULT_REGION=$aws-region
+ENV AWS_REGION=$aws-region
 # Set the working directory
 WORKDIR /app
 
