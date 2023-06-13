@@ -24,8 +24,7 @@ RUN apt-get install -y nodejs
 RUN apt-get install -y libnss3-dev libx11-xcb-dev libxcb-dri3-dev libxcomposite1 libxcursor1 libxi6 libxtst6 libgtk-3-0
 
 # Install Playwright with its browsers
-RUN npm i -g playwright
-RUN npx playwright install
+RUN npm install -g playwright
 
 # Install AWS CLI
 RUN apt-get install -y python3-pip && \
@@ -57,11 +56,14 @@ RUN . /etc/profile.d/java.sh
 
 RUN npm install
 
+# Run the Playwright install command to download browsers
+RUN npx playwright install
+
 # Copy everything from the local directory to the Docker image
 COPY . /app
 
 # Set executable permissions for the run.sh script
 RUN chmod +x /app/scripts/run.sh
 
-# Set the entrypoint to run the run.sh script
+# Change entrypoint to use bash
 ENTRYPOINT ["/app/scripts/run.sh"]
