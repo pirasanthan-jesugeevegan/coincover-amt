@@ -7,6 +7,7 @@ RUN xk6 build --output "/tmp/k6" --with github.com/grafana/xk6-browser
 FROM debian:bullseye
 
 RUN apt-get update && \
+    apt-get install -y git && \
     apt-get install -y chromium && \
     apt-get install -y openjdk-11-jdk && \
     apt-get install -y wget && \
