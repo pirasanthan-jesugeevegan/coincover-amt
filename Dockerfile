@@ -24,7 +24,8 @@ RUN apt-get install -y nodejs
 RUN apt-get install -y libnss3-dev libx11-xcb-dev libxcb-dri3-dev libxcomposite1 libxcursor1 libxi6 libxtst6 libgtk-3-0
 
 # Install Playwright with its browsers
-RUN npm i playwright
+RUN npm i -g playwright
+RUN npx playwright install
 
 # Install AWS CLI
 RUN apt-get install -y python3-pip && \
