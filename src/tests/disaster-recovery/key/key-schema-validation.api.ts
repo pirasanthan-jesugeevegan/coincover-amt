@@ -250,7 +250,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     });
   });
   //////////////////////////////////////
-  // walletId
+  // type
   //////////////////////////////////////
   test('Verify that when type is not in the body should return a 400 Bad Request', async ({
     request,
