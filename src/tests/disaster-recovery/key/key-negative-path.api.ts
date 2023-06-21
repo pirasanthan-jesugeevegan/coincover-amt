@@ -5,7 +5,7 @@ import { generateFullKeyRequestBody } from '../../../helper/rquest-body-generate
 import { header } from '../../../helper/request-header-generater.helper';
 import { post } from '../../../helper/request.helper';
 
-const { local_url } = ENV_VARS;
+const { baseUrl_DR, drToken } = ENV_VARS;
 
 test.describe('Negative Path - POST/key endpoint @dr', async () => {
   test('Verify that with an invalid header and valid body should return a 401 Unauthorized response', async ({
@@ -15,7 +15,7 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody(),
       header('Invalid')
     );
@@ -28,14 +28,14 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
     });
   });
 
-  test('Verify that with an empty header and valid body should return a 401 Unauthorized response', async ({
+  test('Verify that with an empty header and valid body should return a 401 Unauthorized response @test', async ({
     request,
   }) => {
     //Given a the user provide an empty header and valid body
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody(),
       {}
     );
@@ -44,7 +44,7 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
     expect(await response.json()).to.deep.equal({
       statusCode: 401,
       error: 'Unauthorized',
-      message: 'User is not authorized to access this resource',
+      message: 'Unauthorized',
     });
   });
   test('Verify that with an valid header and empty body should return a 401 Unauthorized response', async ({
@@ -54,9 +54,9 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       {},
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message with all field required (userEmail,userId,walletId,type)
     expect(await response.status()).to.equal(400);

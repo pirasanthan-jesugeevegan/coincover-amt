@@ -5,7 +5,7 @@ import { generateFullKeyRequestBody } from '../../../helper/rquest-body-generate
 import { header } from '../../../helper/request-header-generater.helper';
 import { post } from '../../../helper/request.helper';
 
-const { local_url } = ENV_VARS;
+const { baseUrl_DR, drToken } = ENV_VARS;
 
 test.describe('Schema Validation - POST/key endpoint @dr', async () => {
   //////////////////////////////////////
@@ -18,11 +18,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userId: undefined,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -42,11 +42,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userId: 1234,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -66,11 +66,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userId: '',
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -93,11 +93,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userEmail: undefined,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -115,11 +115,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userEmail: 1234,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -137,11 +137,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userEmail: '',
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -159,11 +159,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         userEmail: 'incorrect@example',
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -184,11 +184,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         walletId: undefined,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'walletId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -208,11 +208,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         walletId: 1234,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'walletId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -232,11 +232,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         walletId: '',
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'walletId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -259,11 +259,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         type: undefined,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'type must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -281,11 +281,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         type: 1234,
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'type must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -303,11 +303,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         type: '',
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'type must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -325,11 +325,11 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
     //When the request is sent request to /key endpoint
     const response = await post(
       request,
-      `${local_url}/key`,
+      `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({
         type: 'incorrect',
       }),
-      header('local-auth-token')
+      header(drToken)
     );
     //Then the response should be 400 with message 'Invalid key type requested.'
     expect(await response.status()).to.equal(400);
