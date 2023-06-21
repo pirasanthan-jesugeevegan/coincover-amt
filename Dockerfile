@@ -65,6 +65,4 @@ COPY . /app
 
 # Set executable permissions for the run.sh script
 RUN chmod +x /app/scripts/run.sh
-
-# Change entrypoint to use bash
 ENTRYPOINT ["/app/scripts/run.sh"]
