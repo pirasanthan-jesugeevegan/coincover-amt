@@ -33,6 +33,9 @@ jobs:
             type=raw,value=latest
             type=sha
 
+      - name: Pull latest Docker image
+        run: docker pull ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -40,3 +43,4 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=docker pull ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
