@@ -29,7 +29,8 @@ on:
           - test
 env:
   TEST_TYPE: ${{ github.event.inputs.test_type }}
-  
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository}}
   PLAYWRIGHT_JSON_OUTPUT_NAME: 'results.json'
 
 jobs:
@@ -39,25 +40,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Login in to the Container registry
+        uses: docker/login-action@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{secrets.AWS_REGION}}
+          registry: ${{ env.REGISTRY}}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Login to Amazon ECR registry
-        id: login
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Pull Docker image from Amazon ECR
-        run: docker pull ${ECR_REGISTRY}/coincover:latest
-        env:
-          ECR_REGISTRY: ${{ steps.login.outputs.registry }}
+      - name: Pull Docker image from Container registry
+        run: docker pull $${{env.REGISTRY}}/${{env.IMAGE_NAME}}/latest
 
       - name: Install dependencies
         run: npm install
-        
+
       - name: Run Test, Generate Report & Upload to S3
         run: |
           docker run \
@@ -66,33 +61,4 @@ jobs:
           -e AWS_REGION=${{ secrets.AWS_REGION }} \
           -e USER_NAME=${{ github.actor }} \
           -v "$(pwd)":/app \
-          "${ECR_REGISTRY}/coincover:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
-        env:
-          ECR_REGISTRY: ${{ steps.login.outputs.registry }}
-    # steps:
-    #   - uses: actions/checkout@v2
-
-    #   - name: Configure AWS credentials
-    #     uses: aws-actions/configure-aws-credentials@v1
-    #     with:
-    #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #       aws-region: us-east-1
-
-    #   - name: Login to ECR
-    #     id: login-ecr
-    #     uses: aws-actions/amazon-ecr-login@v1
-
-    #   # - name: Pull image from ECR
-    #   #   run: |
-    #   #     docker pull ${{ steps.login-ecr.outputs.registry }}/my-ecr-repo:my-tag
-
-    #   - name: Run container on EC2
-    #     uses: appleboy/ssh-action@master
-    #     with:
-    #       host: ${ { secrets.HOST_DNS }}
-    #       username: ${ { secrets.USERNAME }}
-    #       key: ${ { secrets.EC2_SSH_KEY }}
-    #       script: |
-    #         chmod +x ./build-push.sh
-    #         ./run-load-test.sh
+          "${{env.IMAGE_NAME}}/latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
