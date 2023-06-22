@@ -8,10 +8,10 @@
   "scripts": {
     "demo:ui": "npx playwright test --grep '@demo' -c ./config/ui-playwright.config.ts --reporter=json,list,allure-playwright",
     "demo:api": "npx playwright test --grep '@demo' -c ./config/api-playwright.config.ts --reporter=json,list,allure-playwright",
-    "demo:pt": "npm run build && k6 run --out json=test_results.json dist/demo.pt.js",
+    "demo:pt": "npm run build && k6 run -e ENV=dev --out json=test_results.json dist/demo.pt.js",
     "test:ui": "npx playwright test /*.ui.ts -c ./config/ui-playwright.config.ts --reporter=json,list,allure-playwright",
     "test:api": "npx playwright test /*.api.ts -c ./config/api-playwright.config.ts --reporter=json,list,allure-playwright",
-    "test:pt": "npm run build && k6 run --out json=test_results.json dist/kds-key.pt.js",
+    "test:pt": "npm run build && k6 run -e ENV=dev --out json=test_results.json dist/key.pt.js",
     "build": "npx webpack",
     "report": "allure generate allure-results -o allure-report --clean"
   },

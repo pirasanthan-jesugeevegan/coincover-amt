@@ -75,7 +75,7 @@ then
     npm run report
 else
     report_path="./dist"
-    npm run build && k6 run --out json=test_results.json dist/$file.pt.js
+    npm run build && k6 run -e ENV=$env --out json=test_results.json dist/$file.pt.js
 fi
 
 # Upload to S3

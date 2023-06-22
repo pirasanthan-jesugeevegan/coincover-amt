@@ -8,6 +8,13 @@ import { header } from '../../../helper/request-header-generater.helper';
 import { generateFullKeyRequestBody } from '../../../helper/rquest-body-generater.helper';
 
 const { baseUrl_DR } = ENV_VARS;
+const counter = [0, 0, 0, 0];
+const keys = [
+  'J5eaTRKmKGda67qgfPmk6zjX',
+  '6FEph0rX9Jkuta4dJzDaCcQMmT9',
+  'CE02C7h8T0dxt2Ayw4nH5D5J',
+  'Lp1C51RES7CcHnfco0SHKfgS',
+];
 
 export let options: Options = {
   thresholds: {
@@ -30,14 +37,21 @@ export let options: Options = {
 };
 
 export function keyEndpoint() {
-  post(
-    http,
-    `${baseUrl_DR}/key`,
-    generateFullKeyRequestBody(),
-    header('invalid_token') // So we don't use up the keys
-  );
-}
+  for (let i = 0; i < keys.length; i++) {
+    const res = post(
+      http,
+      `${baseUrl_DR}/key`,
+      generateFullKeyRequestBody({ type: 'invalid' }),
+      header(keys[i]) // So we don't use up the keys
+    );
 
+    console.log(res.json(), `Key ${keys[i]}`);
+    if (res.json().statusCode === 429) {
+      counter[i] = counter[i] + 1;
+    }
+  }
+  console.log(counter);
+}
 export function handleSummary(data: any) {
   return {
     './dist/index.html': htmlReport(data),
