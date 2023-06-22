@@ -5,6 +5,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository}}
+  GITHUB_SHA: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   build-and-push-image:
@@ -24,23 +25,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-            type=sha
-
-      - name: Pull latest Docker image
-        run: docker pull ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
+      - name: Build and push the tagged docker image to Amazon ECR
+        run: |
+          chmod +x scripts/build-push.sh
+          scripts/build-push.sh

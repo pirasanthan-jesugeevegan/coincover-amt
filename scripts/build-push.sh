@@ -3,6 +3,9 @@ set -ex
 
 source scripts/common.sh
 
+# Login into github 
+echo $GITHUB_TOKEN | docker login ghcr.io -u pirasanthan-jesugeevegan --password-stdin
+
 # Build image with current revision, caching from latest
 docker pull -q ${AMT_RUNNER_DOCKER_IMAGE_CACHE}
 docker build \

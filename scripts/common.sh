@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ECR_PATH=325398057325.dkr.ecr.us-east-1.amazonaws.com
-AMT_RUNNER_DOCKER_IMAGE=${ECR_PATH}/coincover
+ECR_PATH=ghcr.io/pirasanthan-jesugeevegan
+AMT_RUNNER_DOCKER_IMAGE=${ECR_PATH}/coincover-amt
 AMT_RUNNER_DOCKER_IMAGE_CACHE=${AMT_RUNNER_DOCKER_IMAGE}:latest
 AMT_RUNNER_DOCKER_IMAGE_REV=${AMT_RUNNER_DOCKER_IMAGE}:${GITHUB_SHA}
