@@ -61,4 +61,4 @@ jobs:
           -e AWS_REGION=${{ secrets.AWS_REGION }} \
           -e USER_NAME=${{ github.actor }} \
           -v "$(pwd)":/app \
-          "${{env.IMAGE_NAME}}/latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
+          "ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
