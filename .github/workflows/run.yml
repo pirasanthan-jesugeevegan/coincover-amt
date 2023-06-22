@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Docker image from Container registry
-        run: docker pull $${{env.REGISTRY}}/${{env.IMAGE_NAME}}/latest
+        run: docker pull ${{env.REGISTRY}}/${{env.IMAGE_NAME}}/latest
 
       - name: Install dependencies
         run: npm install
