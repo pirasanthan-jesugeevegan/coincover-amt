@@ -43,4 +43,4 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=docker pull ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
+          cache-from: type=registry,ref=ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
