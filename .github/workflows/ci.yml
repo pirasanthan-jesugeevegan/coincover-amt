@@ -24,7 +24,7 @@ jobs:
       - name: Check file changes
         id: file_changes
         run: |
-          changed=$(git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep Dockerfile.base)
+          changed=$(git diff --name-only origin/main..${{ github.sha }} | grep Dockerfile.base)
           echo "CHANGED_FILES=$changed" >> $GITHUB_ENV
 
       - name: Build Docker base image
