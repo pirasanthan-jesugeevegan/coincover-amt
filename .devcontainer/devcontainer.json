@@ -1,0 +1,9 @@
+{
+  "name": "Automation ENV",
+  "dockerFile": "../Dockerfile",
+  "settings": {
+    "workbench.colorTheme": "Shades of Purple",
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": ["esbenp.prettier-vscode", "ahmadawais.shades-of-purple"]
+}

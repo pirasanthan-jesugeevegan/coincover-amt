@@ -1,0 +1,64 @@
+name: Automation Tests
+on:
+  # push:
+  #   branches:
+  #     - master
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: 'Select the Environment to run test against'
+        required: true
+        options:
+          - dev
+          - stage
+      test_type:
+        type: choice
+        description: 'Select the type of test to run'
+        required: true
+        options:
+          - ui
+          - api
+          - pt
+      product:
+        type: choice
+        description: 'Select different product (demo and test) for testing purposes'
+        required: true
+        options:
+          - demo
+          - test
+env:
+  TEST_TYPE: ${{ github.event.inputs.test_type }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository}}
+  PLAYWRIGHT_JSON_OUTPUT_NAME: 'results.json'
+
+jobs:
+  Run_Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY}}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Docker image from Container registry
+        run: docker pull ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Test, Generate Report & Upload to S3
+        run: |
+          docker run \
+          -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+          -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          -e AWS_REGION=${{ secrets.AWS_REGION }} \
+          -e USER_NAME=${{ github.actor }} \
+          -v "$(pwd)":/app \
+          "ghcr.io/pirasanthan-jesugeevegan/coincover-amt:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
