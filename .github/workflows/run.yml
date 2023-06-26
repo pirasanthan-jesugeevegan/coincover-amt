@@ -27,11 +27,6 @@ on:
         options:
           - demo
           - test
-env:
-  TEST_TYPE: ${{ github.event.inputs.test_type }}
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository}}
-  PLAYWRIGHT_JSON_OUTPUT_NAME: 'results.json'
 
 jobs:
   Run_Test:
@@ -43,7 +38,7 @@ jobs:
       - name: Login in to the Container registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ env.REGISTRY}}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
