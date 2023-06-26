@@ -40,7 +40,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pull Docker image from Container registry
-        run: docker pull ghcr.io${{env.GIT_USERNAME}}/${{env.GITHUB_REPOSITORY}}:latest
+        run: docker pull ghcr.io${{github.actor}}/${{github.repository}}:latest
 
       - name: Install dependencies
         run: npm install
@@ -53,4 +53,4 @@ jobs:
           -e AWS_REGION=${{ secrets.AWS_REGION }} \
           -e USER_NAME=${{ github.actor }} \
           -v "$(pwd)":/app \
-          "ghcr.io${{env.GIT_USERNAME}}/${{env.GITHUB_REPOSITORY}}:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
+          "ghcr.io${{github.actor}}/${{github.repository}}:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
