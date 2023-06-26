@@ -7,7 +7,7 @@ upload_to_github_pages() {
     BRANCH_NAME="gh-pages"
 
     # Set the HTML file path
-    HTML_FILE_PATH="/allure-report"
+    HTML_FILE_PATH="../allure-result"
 
     # Set the commit message
     COMMIT_MESSAGE="Upload API HTML file"
