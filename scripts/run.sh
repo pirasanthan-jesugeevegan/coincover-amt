@@ -89,7 +89,7 @@ upload_code=$?  # Keep the return code for the actual test run
 # Send notifcation to Teams
 if [ $upload_code -eq 0 ]; then
     export TEST_TYPE=$type
-    export USER_NAME=$GIT_USERNAME
+    export USER_NAME=$USER_NAME
     node ms-teams.js
     notification_code=$?
 fi
