@@ -1,8 +1,6 @@
 name: Docker Build & Push
 on:
   push:
-    paths:
-      - 'Dockerfile.base'
     branches: ['master']
 
 jobs:
@@ -23,13 +21,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check Dockerfile.base changes
-        id: dockerfile
-        run: |
-          echo "::set-output name=changed::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})"
+      - name: Check file changes
+        id: file_changes
+        run: echo "::set-output name=changed::$(git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep Dockerfile.base)"
 
       - name: Build Docker base image
-        if: steps.dockerfile.outputs.changed == 'Dockerfile.base'
+        if: steps.file_changes.outputs.changed == 'Dockerfile.base'
         run: |
           docker pull -q ghcr.io/${{github.repository}}:base
           docker build \
