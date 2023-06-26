@@ -23,10 +23,12 @@ jobs:
 
       - name: Check file changes
         id: file_changes
-        run: echo "::set-output name=changed::$(git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep Dockerfile.base)"
+        run: |
+          changed=$(git diff --name-only ${{ github.base_ref }}..${{ github.sha }} | grep Dockerfile.base)
+          echo "CHANGED_FILES=$changed" >> $GITHUB_ENV
 
       - name: Build Docker base image
-        if: steps.file_changes.outputs.changed == 'Dockerfile.base'
+        if: env.CHANGED_FILES == 'Dockerfile.base'
         run: |
           docker pull -q ghcr.io/${{github.repository}}:base
           docker build \
