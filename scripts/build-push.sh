@@ -2,7 +2,7 @@
 set -ex
 
 # Accessing Git username
-GIT_USERNAME=$(git config user.name)
+GIT_USERNAME=$(git log -1 --pretty=format:'%an')
 echo "Git username: $GIT_USERNAME"
 
 CR_PATH=ghcr.io/pirasanthan-jesugeevegan
