@@ -51,5 +51,6 @@ jobs:
           -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
           -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
           -e AWS_REGION=${{ secrets.AWS_REGION }} \
+          -e USER_NAME=${{ github.actor }} \
           -v "$(pwd)":/app \
           "ghcr.io/${{github.repository}}:latest" --env "${{ github.event.inputs.env }}" --type "${{ github.event.inputs.test_type }}" --product "${{ github.event.inputs.product }}" --file demo
