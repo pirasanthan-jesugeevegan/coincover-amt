@@ -17,7 +17,7 @@ run-api:
     -e USER_NAME=${ACTOR } \
 	-v $(PWD):/app \
 	325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest \
-	--env dev --type api --product tp --file demo \
+	--env dev --type api --product demo --file demo \
 
 report:
 	docker run -v $(PWD):/app 325398057325.dkr.ecr.us-east-1.amazonaws.com/coincover:latest report

@@ -1,7 +1,59 @@
 #!/usr/bin/env bash
 set -e
 
-source scripts/publish-report.sh
+upload_to_github_pages() {
+    # Set your GitHub username, repository name, and branch name
+    GITHUB_USERNAME="pirasanthan-jesugeevegan"
+    REPO_NAME="coincover-amt"
+    BRANCH_NAME="gh-pages"
+
+    # Set the HTML file path
+    HTML_FILE_PATH="./allure-report"
+
+    # Set the commit message
+    COMMIT_MESSAGE="Upload API HTML file"
+
+    # Set the remote repository URL
+    REMOTE_REPO_URL="https://github.com/$GITHUB_USERNAME/$REPO_NAME.git"
+
+    # Create a temporary directory
+    TEMP_DIR=$(mktemp -d)
+
+    # Check if the gh-pages branch exists
+    if git branch --list "$BRANCH_NAME" >/dev/null; then
+        # Switch to the existing gh-pages branch
+        git checkout "$BRANCH_NAME"
+    else
+        # Create a new gh-pages branch
+        git checkout --orphan "$BRANCH_NAME"
+    fi
+
+    # Copy the HTML file to the temporary directory
+    cp -r "$HTML_FILE_PATH" "$TEMP_DIR"
+
+    # Navigate to the temporary directory
+    cd "$TEMP_DIR"
+
+    # Set the Git configuration
+    git config user.name "$GITHUB_USERNAME"
+    git config user.email "$GITHUB_USERNAME@example.com"
+
+    # Add the HTML file
+    git add .
+
+    # Commit the changes
+    git commit -m "$COMMIT_MESSAGE"
+
+    # Set the remote repository URL
+    git remote add origin "$REMOTE_REPO_URL"
+
+    # Push the changes to the GitHub Pages branch
+    git push origin "$BRANCH_NAME" --force
+
+    # Cleanup temporary directory
+    rm -rf "$TEMP_DIR"
+}
+
 
 usage()
 {
@@ -80,23 +132,22 @@ else
     npm run build && k6 run -e ENV=$env --out json=test_results.json dist/$file.pt.js
 fi
 
+# # Upload to S3
+# aws s3 sync \
+#     --acl public-read \
+#     ${report_path} \
+#     s3://coincover-pj/${type}/${date=$(date '+%Y-%m-%d')}
+# upload_code=$?  # Keep the return code for the actual test run
+
 upload_to_github_pages
+# # Send notifcation to Teams
+# if [ $upload_code -eq 0 ]; then
+#     export TEST_TYPE=$type
+#     export USER_NAME=$USER_NAME
+#     node ms-teams.js
+#     notification_code=$?
+# fi
 
-# Upload to S3
-aws s3 sync \
-    --acl public-read \
-    ${report_path} \
-    s3://coincover-pj/${type}/${date=$(date '+%Y-%m-%d')}
-upload_code=$?  # Keep the return code for the actual test run
-
-
-# Send notifcation to Teams
-if [ $upload_code -eq 0 ]; then
-    export TEST_TYPE=$type
-    export USER_NAME=$USER_NAME
-    node ms-teams.js
-    notification_code=$?
-fi
 
 
 # All 3 commands should have succeeded (code=0) for the script to be consider successful
