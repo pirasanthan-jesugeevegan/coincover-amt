@@ -35,6 +35,7 @@ upload_to_github_pages() {
     cd "$TEMP_DIR"
 
     # Set the Git configuration
+    git config --global --add safe.directory /app
     git config user.name "$GITHUB_USERNAME"
     git config user.email "$GITHUB_USERNAME@example.com"
 
