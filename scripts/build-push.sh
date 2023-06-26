@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 set -ex
 
-source scripts/common.sh
+# Accessing Git username
+GIT_USERNAME=$(git config user.name)
+echo "Git username: $GIT_USERNAME"
+
+CR_PATH=ghcr.io/pirasanthan-jesugeevegan
+AMT_RUNNER_DOCKER_IMAGE=${CR_PATH}/coincover-amt
+AMT_RUNNER_DOCKER_IMAGE_CACHE=${AMT_RUNNER_DOCKER_IMAGE}:latest
+AMT_RUNNER_DOCKER_IMAGE_REV=${AMT_RUNNER_DOCKER_IMAGE}:${GITHUB_SHA}
 
 # Build image with current revision, caching from latest
 docker pull -q ${AMT_RUNNER_DOCKER_IMAGE_CACHE}
