@@ -31,9 +31,7 @@ jobs:
       - name: Build Docker base image
         if: steps.verify-changed-files.outputs.any_changed == 'true'
         run: |
-          docker pull -q ghcr.io/${{github.repository}}:base
           docker build \
-          --cache-from ghcr.io/${{github.repository}}:base \
           -t ghcr.io/${{github.repository}}:base \
           -f Dockerfile.base .
 
