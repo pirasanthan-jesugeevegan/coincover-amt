@@ -1,6 +1,8 @@
 name: Docker Build & Push
 on:
   push:
+    paths:
+      - 'Dockerfile.base'
     branches: ['master']
 
 jobs:
@@ -20,6 +22,20 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check Dockerfile.base changes
+        id: dockerfile
+        run: |
+          echo "::set-output name=changed::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})"
+
+      - name: Build Docker base image
+        if: steps.dockerfile.outputs.changed == 'Dockerfile.base'
+        run: |
+          docker pull -q ghcr.io/${{github.repository}}:base
+          docker build \
+          --cache-from ghcr.io/${{github.repository}}:base \
+          -t ghcr.io/${{github.repository}}:base \
+          -f Dockerfile.base .
 
       - name: Build and push the tagged docker image to Amazon ECR
         run: |
