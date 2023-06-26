@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+source scripts/publish-report.sh
+
 usage()
 {
     echo "run.sh:  this script runs cypress, generate a test report and upload it to S3."
@@ -77,6 +79,8 @@ else
     report_path="./dist"
     npm run build && k6 run -e ENV=$env --out json=test_results.json dist/$file.pt.js
 fi
+
+upload_to_github_pages
 
 # Upload to S3
 aws s3 sync \
