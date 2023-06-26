@@ -22,11 +22,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check file changes
-        uses: tj-actions/verify-changed-files@v16
+        uses: tj-actions/changed-files@v37
         id: verify-changed-files
         with:
           files: |
-            /Dockerfile.base
+            Dockerfile.base
 
       - name: Build Docker base image
         if: steps.verify-changed-files.outputs.files_changed == 'true'
