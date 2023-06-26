@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 set -ex
 
-# Accessing Git username
-GIT_USERNAME="$GITHUB_ACTOR"
-echo "Git username: $GIT_USERNAME"
-
-CR_PATH=ghcr.io/pirasanthan-jesugeevegan
-AMT_RUNNER_DOCKER_IMAGE=${CR_PATH}/coincover-amt
+CR_PATH=ghcr.io/${GIT_USERNAME}
+AMT_RUNNER_DOCKER_IMAGE=${CR_PATH}/${GITHUB_REPOSITORY}
 AMT_RUNNER_DOCKER_IMAGE_CACHE=${AMT_RUNNER_DOCKER_IMAGE}:latest
 AMT_RUNNER_DOCKER_IMAGE_REV=${AMT_RUNNER_DOCKER_IMAGE}:${GITHUB_SHA}
 
