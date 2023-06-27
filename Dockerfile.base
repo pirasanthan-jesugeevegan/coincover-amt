@@ -39,14 +39,3 @@ ENV PLAYWRIGHT_JSON_OUTPUT_NAME=results.json
 ENV AWS_ACCESS_KEY_ID=
 ENV AWS_SECRET_ACCESS_KEY=
 ENV AWS_REGION=
-
-RUN JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))" && \
-    echo "export JAVA_HOME=$JAVA_HOME" >> /etc/profile.d/java.sh && \
-    echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/profile.d/java.sh && \
-    chmod +x /etc/profile.d/java.sh
-
-# Reload the environment variables
-RUN . /etc/profile.d/java.sh
-
-# Run the Playwright install command to download browsers
-RUN npx playwright install
