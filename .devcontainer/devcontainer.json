@@ -5,5 +5,12 @@
     "workbench.colorTheme": "Shades of Purple",
     "terminal.integrated.shell.linux": "/bin/bash"
   },
-  "extensions": ["esbenp.prettier-vscode", "ahmadawais.shades-of-purple"]
+  "extensions": [
+    "esbenp.prettier-vscode",
+    "ahmadawais.shades-of-purple",
+    "aaron-bond.better-comments",
+    "mikestead.dotenv",
+    "pkief.material-icon-theme",
+    "ms-playwright.playwright"
+  ]
 }
