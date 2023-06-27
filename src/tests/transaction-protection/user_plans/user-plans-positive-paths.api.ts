@@ -12,7 +12,7 @@ const { stdTxnToken, baseUrl_TP } = ENV_VARS;
 
 test.describe('Positive Path - POST/user/{user_id}/plan endpoint @tp', async () => {
   const userId = Math.floor(
-    Math.random() * (10000000000000 - 900000) + 900000
+    Math.random() * (10000000000000 - 900000) + 900000,
   ).toString();
 
   test.beforeAll(async ({ request }) => {
@@ -21,7 +21,7 @@ test.describe('Positive Path - POST/user/{user_id}/plan endpoint @tp', async () 
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody({ userId }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201
     expect(await response.status()).to.equal(201);
@@ -35,7 +35,7 @@ test.describe('Positive Path - POST/user/{user_id}/plan endpoint @tp', async () 
       request,
       `${baseUrl_TP}/user/${userId}/plan`,
       generateUserPlanRequestBody(),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(201);
@@ -51,7 +51,7 @@ test.describe('Positive Path - POST/user/{user_id}/plan endpoint @tp', async () 
       request,
       `${baseUrl_TP}/user/${userId}/plan`,
       generateUserPlanRequestBody({ levelUsd: 10.0 }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(201);

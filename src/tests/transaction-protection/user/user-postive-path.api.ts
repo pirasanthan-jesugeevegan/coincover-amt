@@ -21,7 +21,7 @@ test.describe('Positive Path - POST/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody(),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(201);
@@ -37,7 +37,7 @@ test.describe('Positive Path - POST/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user`,
       generateMandatoryUserRequestBody(),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(201);
@@ -47,7 +47,7 @@ test.describe('Positive Path - POST/user endpoint @tp', async () => {
 
 test.describe('Positive Path - PATCH/user endpoint @tp', async () => {
   const userId = Math.floor(
-    Math.random() * (10000000000000 - 900000) + 900000
+    Math.random() * (10000000000000 - 900000) + 900000,
   ).toString();
   //Given the user creates a new user
   test.beforeAll(async ({ request }) => {
@@ -55,7 +55,7 @@ test.describe('Positive Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody({ userId: userId }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     expect(await response.status()).to.equal(201);
   });
@@ -67,7 +67,7 @@ test.describe('Positive Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user/${userId}`,
       patchUserRequestBody(),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 204 with no response body
     expect(await response.status()).to.equal(204);
@@ -86,7 +86,7 @@ test.describe('Positive Path - PATCH/user endpoint @tp', async () => {
         lastName: undefined,
         residenceCountry: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(204);
@@ -106,7 +106,7 @@ test.describe('Positive Path - PATCH/user endpoint @tp', async () => {
         firstName: undefined,
         residenceCountry: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(204);
@@ -122,7 +122,7 @@ test.describe('Positive Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user/${userId}`,
       patchUserRequestBody({ firstName: undefined, lastName: undefined }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 201 with no response body
     expect(await response.status()).to.equal(204);

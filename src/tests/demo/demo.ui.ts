@@ -12,7 +12,7 @@ test.describe('navigation @demo', () => {
     await ElementToHaveText(
       page,
       '#checkbox-info-display',
-      'Thanks for checking the box'
+      'Thanks for checking the box',
     );
   });
 });

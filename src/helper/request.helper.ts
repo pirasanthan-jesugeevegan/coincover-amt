@@ -4,8 +4,8 @@ import { payloadGenerator } from '../utils/header-generator';
 export function get(
   request: APIRequestContext,
   url: string,
-  headers?: {},
-  data: Record<string, any> = {}
+  headers?: object,
+  data: Record<string, any> = {},
 ) {
   const payload = payloadGenerator(request, data, headers);
   const response = request.patch(url, ...payload);
@@ -16,7 +16,7 @@ export function post(
   request: APIRequestContext,
   url: string,
   data: Record<string, any> = {},
-  headers?: {}
+  headers?: object,
 ) {
   const payload = payloadGenerator(request, data, headers);
   const response = request.post(url, ...payload);
@@ -27,7 +27,7 @@ export function patch(
   request: APIRequestContext,
   url: string,
   data: Record<string, any> = {},
-  headers?: {}
+  headers?: object,
 ) {
   const payload = payloadGenerator(request, data, headers);
   const response = request.patch(url, ...payload);

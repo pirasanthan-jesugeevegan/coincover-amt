@@ -22,7 +22,7 @@ test.describe('Negative Path - POST/user endpoint @tp', async () => {
       generateFullUserRequestBody({
         userId: '1',
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'User already exists'
     expect(await response.status()).to.equal(400);
@@ -42,7 +42,7 @@ test.describe('Negative Path - POST/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody(),
-      {}
+      {},
     );
     //Then the response should be 401 with response message 'missing authorization header'
     expect(await response.status()).to.equal(401);
@@ -60,7 +60,7 @@ test.describe('Negative Path - POST/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody(),
-      header('invalid')
+      header('invalid'),
     );
     //Then the response should be 401 with response message 'invalid authorization header'
     expect(await response.status()).to.equal(401);
@@ -72,7 +72,7 @@ test.describe('Negative Path - POST/user endpoint @tp', async () => {
 
 test.describe('Negative Path - PATCH/user endpoint @tp', async () => {
   const userId = Math.floor(
-    Math.random() * (10000000000000 - 900000) + 900000
+    Math.random() * (10000000000000 - 900000) + 900000,
   ).toString();
   //Given the user creates a new user
   test.beforeAll(async ({ request }) => {
@@ -80,7 +80,7 @@ test.describe('Negative Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody({ userId }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     expect(await response.status()).to.equal(201);
   });
@@ -93,7 +93,7 @@ test.describe('Negative Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user/${userId}`,
       patchUserRequestBody(),
-      {}
+      {},
     );
     //Then the response should be 401 with response body message 'missing authorization header'
     expect(await response.status()).to.equal(401);
@@ -109,7 +109,7 @@ test.describe('Negative Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user/${userId}`,
       patchUserRequestBody(),
-      header('Invalid')
+      header('Invalid'),
     );
     //Then the response should be 401 with response message 'invalid authorization header'
     expect(await response.status()).to.equal(401);
@@ -127,7 +127,7 @@ test.describe('Negative Path - PATCH/user endpoint @tp', async () => {
       request,
       `${baseUrl_TP}/user/999999999991199911991919191919`,
       patchUserRequestBody(),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with response message 'User not found'
     expect(await response.status()).to.equal(404);

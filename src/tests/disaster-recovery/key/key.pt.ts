@@ -16,7 +16,7 @@ const keys = [
   'Lp1C51RES7CcHnfco0SHKfgS',
 ];
 
-export let options: Options = {
+export const options: Options = {
   thresholds: {
     http_reqs: ['rate>=110'],
   },
@@ -42,7 +42,7 @@ export function keyEndpoint() {
       http,
       `${baseUrl_DR}/key`,
       generateFullKeyRequestBody({ type: 'invalid' }),
-      header(keys[i]) // So we don't use up the keys
+      header(keys[i]), // So we don't use up the keys
     );
 
     console.log(res.json(), `Key ${keys[i]}`);

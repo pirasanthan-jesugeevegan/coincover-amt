@@ -22,7 +22,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userId: undefined,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -46,7 +46,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userId: 1234,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -70,7 +70,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userId: '',
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -97,7 +97,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userEmail: undefined,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -119,7 +119,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userEmail: 1234,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -141,7 +141,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userEmail: '',
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -163,7 +163,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         userEmail: 'incorrect@example',
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'userEmail must be an email'
     expect(await response.status()).to.equal(400);
@@ -188,7 +188,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         walletId: undefined,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'walletId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -212,7 +212,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         walletId: 1234,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'walletId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -236,7 +236,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         walletId: '',
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'walletId must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -263,7 +263,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         type: undefined,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'type must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -285,7 +285,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         type: 1234,
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'type must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -307,7 +307,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         type: '',
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'type must be a string longer than or equal to 1 characters'
     expect(await response.status()).to.equal(400);
@@ -329,7 +329,7 @@ test.describe('Schema Validation - POST/key endpoint @dr', async () => {
       generateFullKeyRequestBody({
         type: 'incorrect',
       }),
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message 'Invalid key type requested.'
     expect(await response.status()).to.equal(400);

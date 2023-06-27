@@ -17,7 +17,7 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
       request,
       `${baseUrl_DR}/key`,
       generateFullKeyRequestBody(),
-      header('Invalid')
+      header('Invalid'),
     );
     //Then the response should be 401 with message 'Unauthorized'
     expect(await response.status()).to.equal(401);
@@ -37,7 +37,7 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
       request,
       `${baseUrl_DR}/key`,
       generateFullKeyRequestBody(),
-      {}
+      {},
     );
     //Then the response should be 401 with message 'User is not authorized to access this resource'
     expect(await response.status()).to.equal(401);
@@ -56,7 +56,7 @@ test.describe('Negative Path - POST/key endpoint @dr', async () => {
       request,
       `${baseUrl_DR}/key`,
       {},
-      header(drToken)
+      header(drToken),
     );
     //Then the response should be 400 with message with all field required (userEmail,userId,walletId,type)
     expect(await response.status()).to.equal(400);

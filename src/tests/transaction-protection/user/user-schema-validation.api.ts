@@ -22,7 +22,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         userId: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/userId Expected required property, body/userId Expected string'
     expect(await response.status()).to.equal(400);
@@ -45,7 +45,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         userId: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/userId Expected string'
     expect(await response.status()).to.equal(400);
@@ -69,7 +69,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         firstName: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/firstName Expected required property, body/firstName Expected string'
     expect(await response.status()).to.equal(400);
@@ -92,7 +92,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         firstName: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/firstName Expected string'
     expect(await response.status()).to.equal(400);
@@ -116,7 +116,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         lastName: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/lastName Expected required property, body/lastName Expected string'
     expect(await response.status()).to.equal(400);
@@ -139,7 +139,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         lastName: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/lastName Expected string'
     expect(await response.status()).to.equal(400);
@@ -163,7 +163,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         dob: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/dob Expected required property, body/dob Expected string'
     expect(await response.status()).to.equal(400);
@@ -185,7 +185,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         dob: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/dob Expected string'
     expect(await response.status()).to.equal(400);
@@ -207,7 +207,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         dob: '01/01/1999',
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/dob Expected string to match pattern ^\\d{4}-\\d{2}-\\d{2}$'
     expect(await response.status()).to.equal(400);
@@ -232,12 +232,12 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         residenceCountry: undefined,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 and message contain 'body/residenceCountry Expected required property'
     expect(await response.status()).to.equal(400);
     expect(await response.text()).to.include(
-      'body/residenceCountry Expected required property'
+      'body/residenceCountry Expected required property',
     );
   });
 
@@ -252,12 +252,12 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         residenceCountry: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message contain 'body/residenceCountry Expected 'AF''
     expect(await response.status()).to.equal(400);
     expect(await response.text()).to.include(
-      "body/residenceCountry Expected 'AF'"
+      "body/residenceCountry Expected 'AF'",
     );
   });
 
@@ -272,12 +272,12 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         residenceCountry: 'SweetHomeTestLand',
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message "body/residenceCountry Expected 'AF"
     expect(await response.status()).to.equal(400);
     expect(await response.text()).to.include(
-      "body/residenceCountry Expected 'AF"
+      "body/residenceCountry Expected 'AF",
     );
   });
   //////////////////////////////////////
@@ -294,7 +294,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         nationality: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message contain "body/nationality Expected 'AF'"
     expect(await response.status()).to.equal(400);
@@ -312,7 +312,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         nationality: 'SweetHomeTestLand',
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message "body/nationality Expected 'AF"
     expect(await response.status()).to.equal(400);
@@ -321,7 +321,7 @@ test.describe(`Schema Validation - POST/user endpoint @tp`, async () => {
 });
 test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
   const userId = Math.floor(
-    Math.random() * (10000000000000 - 900000) + 900000
+    Math.random() * (10000000000000 - 900000) + 900000,
   ).toString();
   //Given the user creates a new user
   test.beforeAll(async ({ request }) => {
@@ -329,7 +329,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
       request,
       `${baseUrl_TP}/user`,
       generateFullUserRequestBody({ userId: userId }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     expect(await response.status()).to.equal(201);
   });
@@ -343,7 +343,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
       request,
       `${baseUrl_TP}/user/${userId}`,
       {},
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/firstName Expected required property, body/firstName Expected string'
     expect(await response.status()).to.equal(400);
@@ -367,7 +367,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         firstName: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/firstName Expected string'
     expect(await response.status()).to.equal(400);
@@ -391,7 +391,7 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         lastName: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message 'body/lastName Expected string'
     expect(await response.status()).to.equal(400);
@@ -463,12 +463,12 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         residenceCountry: 12345,
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message contain 'body/residenceCountry Expected 'AF''
     expect(await response.status()).to.equal(400);
     expect(await response.text()).to.include(
-      "body/residenceCountry Expected 'AF'"
+      "body/residenceCountry Expected 'AF'",
     );
   });
 
@@ -483,12 +483,12 @@ test.describe(`Schema Validation - PATCH/user endpoint @tp`, async () => {
       generateFullUserRequestBody({
         residenceCountry: 'SweetHomeTestLand',
       }),
-      header(stdTxnToken)
+      header(stdTxnToken),
     );
     //Then the response should be 400 with message "body/residenceCountry Expected 'AF"
     expect(await response.status()).to.equal(400);
     expect(await response.text()).to.include(
-      "body/residenceCountry Expected 'AF"
+      "body/residenceCountry Expected 'AF",
     );
   });
   //////////////////////////////////////

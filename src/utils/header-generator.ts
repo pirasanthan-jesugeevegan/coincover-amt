@@ -1,7 +1,7 @@
 export function payloadGenerator(
   type: Record<string, any> = {},
   data: Record<string, any> = {},
-  headers: Record<string, any> = {}
+  headers: Record<string, any> = {},
 ): any {
   if (type.TLS_1_0) {
     if (headers) {
