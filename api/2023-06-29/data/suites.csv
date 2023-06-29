@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Jun 27 16:53:38 BST 2023","Tue Jun 27 16:53:39 BST 2023","1490","chromium","","Happy Path - Register User Endpoint @demo","","","Verify that the user can create a new user with 201 status code",""
+"passed","Tue Jun 27 16:53:38 BST 2023","Tue Jun 27 16:53:38 BST 2023","394","chromium","","Unhappy Path - Register User Endpoint @demo","","","Verify that with an empty body payload should return a 400 Bad Request response",""
+"passed","Tue Jun 27 16:53:38 BST 2023","Tue Jun 27 16:53:38 BST 2023","400","chromium","","Unhappy Path - Register User Endpoint @demo","","","Verify that with an with password & no username body payload should return a 400 Bad Request response",""
+"passed","Tue Jun 27 16:53:38 BST 2023","Tue Jun 27 16:53:38 BST 2023","555","chromium","","Unhappy Path - Register User Endpoint @demo","","","Verify that with an with username & no password body payload should return a 400 Bad Request response",""
+"passed","Tue Jun 27 16:53:38 BST 2023","Tue Jun 27 16:53:39 BST 2023","390","chromium","","Unhappy Path - Register User Endpoint @demo","","","Verify that with a user name that already exist should return a 400 Bad Request response",""
